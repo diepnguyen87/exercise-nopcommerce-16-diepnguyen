@@ -43,6 +43,20 @@ public class Register_01 extends AbstractTest {
 		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.CONFIRMPASSWORD_ERROR_MESSAGE, "Password is required."));
 	}
 
+	@Test
+	public void TC_02_registerWithInvalidEmail() {
+		registerObject.inputFirstName("Diep");
+		registerObject.inputLastName("Nguyen");
+		registerObject.inputEmail("123@123.123");
+		registerObject.inputPasword("123456");
+		registerObject.inputConfirmPassword(("123456"))
+		
+		registerObject.clickRegisterButton();
+		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.EMAIL_ERROR_MESSAGE, "Email is required."));
+		
+		
+	}
+	
 	@AfterClass
 	public void afterClass() {
 	}
