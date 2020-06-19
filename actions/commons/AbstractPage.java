@@ -1,6 +1,7 @@
 package commons;
 
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -359,6 +360,11 @@ public abstract class AbstractPage {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int getRandomNumber() {
+		Random random = new Random();
+		return random.nextInt(1000);
 	}
 
 	private WebDriverWait explicitWait;

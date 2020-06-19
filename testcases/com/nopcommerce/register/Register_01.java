@@ -49,12 +49,29 @@ public class Register_01 extends AbstractTest {
 		registerObject.inputLastName("Nguyen");
 		registerObject.inputEmail("123@123.123");
 		registerObject.inputPasword("123456");
-		registerObject.inputConfirmPassword(("123456"))
+		registerObject.inputConfirmPassword("123456");
 		
 		registerObject.clickRegisterButton();
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.EMAIL_ERROR_MESSAGE, "Email is required."));
+		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.WRONG_EMAIL_MESSAGE, "Wrong email"));
+	}
+	
+	@Test
+	public void TC_03_registerWithExistedEmail() {
+		registerObject.inputEmail("van.tran@gmail.com");
+		registerObject.inputPasword("123456");
+		registerObject.inputConfirmPassword("123456");
 		
-		
+		registerObject.clickRegisterButton();
+		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.SUMMARY_ERROR_MESSAGE, "The specified email already exists"));	
+	}
+	
+	@Test
+	public void TC_04_registerWithPasswordLessThan6Chars() {
+		registerObject.inputEmail("diep.nguyen" + registerObject.getRandomNumber() + "@gmail.com");
+		registerObject.inputPasword("12345");
+		registerObject.pressControlTab();
+		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.PASSWORD_ERROR_MESSAGE, "Password must meet the following rules:\nmust have at least 6 characters"));	
+			
 	}
 	
 	@AfterClass
