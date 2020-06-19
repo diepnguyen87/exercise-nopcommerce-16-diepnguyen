@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Nop Commerce" duration-ms="10093" started-at="2020-06-19T09:41:45Z" finished-at="2020-06-19T09:41:56Z">
+    <groups>
+    </groups>
+    <test name="Run on FIREFOX" duration-ms="10093" started-at="2020-06-19T09:41:45Z" finished-at="2020-06-19T09:41:56Z">
+      <class name="com.nopcommerce.register.Register_01">
+        <test-method status="PASS" signature="beforeClass(java.lang.String)[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="beforeClass" is-config="true" duration-ms="8642" started-at="2020-06-19T09:41:45Z" finished-at="2020-06-19T09:41:54Z">
+          <params>
+            <param index="0">
+              <value>
+                <![CDATA[firefox]]>
+              </value>
+            </param>
+          </params>
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeClass -->
+        <test-method status="PASS" signature="TC_01_registerWithEmptyData()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="TC_01_registerWithEmptyData" duration-ms="1425" started-at="2020-06-19T09:41:54Z" finished-at="2020-06-19T09:41:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_01_registerWithEmptyData -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="afterClass" is-config="true" duration-ms="1" started-at="2020-06-19T09:41:56Z" finished-at="2020-06-19T09:41:56Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterClass -->
+      </class> <!-- com.nopcommerce.register.Register_01 -->
+    </test> <!-- Run on FIREFOX -->
+  </suite> <!-- Nop Commerce -->
+</testng-results>

@@ -43,22 +43,4 @@ public abstract class AbstractTest {
 		return driver;
 	}
 
-	public WebDriver getBrowserDriver(String browserName, String ip) {
-		if (browserName.equalsIgnoreCase("firefox")) {
-			driver = new FirefoxDriver();
-		} else if (browserName.equalsIgnoreCase("chrome")) {
-			System.setProperty("webdriver.chrome.driver", ".\\browserDrivers\\chromedriver.exe");
-			driver = new ChromeDriver();
-		} else if (browserName.equalsIgnoreCase("edge")) {
-			System.setProperty("webdriver.edge.driver", ".\\browserDrivers\\msedgedriver.exe");
-			driver = new EdgeDriver();
-		} else {
-			System.out.println("Please run only 3 browsers: chrome, firefox and edge");
-		}
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(GlobalConstants.LONG_TIMEOUT, TimeUnit.SECONDS);
-		driver.get(GlobalConstants.NOPCOMMERCE_URL);
-		return driver;
-	}
-
 }
