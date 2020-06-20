@@ -17,5 +17,11 @@ public class HomePageObject extends AbstractPage {
 		waitForElementVisible(driver, HomePageUI.REGISTER_CONTINUE_BUTTON);
 		clickToElement(driver, HomePageUI.REGISTER_CONTINUE_BUTTON);
 	}
+
+	public MyAccountPageObject clickMyAccountLink() {
+		waitForElementVisible(driver, HomePageUI.MY_ACCOUNT_LINK);
+		clickToElement(driver, HomePageUI.MY_ACCOUNT_LINK);
+		return new MyAccountPageObject(driver);
+	}
 	
 }

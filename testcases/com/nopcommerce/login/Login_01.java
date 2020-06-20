@@ -1,5 +1,10 @@
 package com.nopcommerce.login;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import browsers.BrowserDriverFactory;
@@ -7,13 +12,6 @@ import browsers.DriverManager;
 import pageObjects.LoginPageObject;
 import pageObjects.PageFactoryManager;
 import pageObjects.StartPageObject;
-
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.server.handler.GetElementText;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
 
 public class Login_01 {
 

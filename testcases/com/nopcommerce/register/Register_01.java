@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import browsers.BrowserDriverFactory;
 import browsers.DriverManager;
 import commons.AbstractTest;
+import commons.GlobalConstants;
 import pageObjects.HomePageObject;
 import pageObjects.PageFactoryManager;
 import pageObjects.RegisterPageObject;
@@ -18,7 +19,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 
-public class Register_01 extends AbstractTest {
+public class Register_01{
 
 	private WebDriver driver;
 	private DriverManager driverManager;
@@ -48,8 +49,8 @@ public class Register_01 extends AbstractTest {
 
 	@Test
 	public void TC_02_registerWithInvalidEmail() {
-		registerObject.inputFirstName("Diep");
-		registerObject.inputLastName("Nguyen");
+		registerObject.inputFirstName(GlobalConstants.fistName);
+		registerObject.inputLastName(GlobalConstants.lastName);
 		registerObject.inputEmail("123@123.123");
 		registerObject.inputPasword("123456");
 		registerObject.inputConfirmPassword("123456");

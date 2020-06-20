@@ -17,7 +17,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class AbstractPage {
 	
-	private String castToObject(String xpathLocator, String... xpathValues) {
+	public String castToObject(String xpathLocator, String... xpathValues) {
 		return String.format(xpathLocator, (Object[])xpathValues);
 	}
 	
@@ -29,9 +29,10 @@ public abstract class AbstractPage {
 //			return null;
 //		}
 //	}
-//
-//	public void navigateToPage_MoreMenu(WebDriver driver, String pageName ) {
+
+//	public void navigateToPage(WebDriver driver, String pageName ) {
 //		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_PAGE, pageName);
+//		waitfor
 //		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE, pageName);
 //	}
 
@@ -122,7 +123,11 @@ public abstract class AbstractPage {
 	public WebElement findElement(WebDriver driver, String xpathLocator) {
 		return driver.findElement(byXpath(driver, xpathLocator));
 	}
-
+	
+	public WebElement findElement(WebDriver driver, String xpathLocator, String... xpathValues) {
+		return driver.findElement(byXpath(driver, castToObject(xpathLocator, xpathValues)));
+	}
+	
 	public List<WebElement> findElements(WebDriver driver, String xpathLocator) {
 		return driver.findElements(byXpath(driver, xpathLocator));
 	}
@@ -216,6 +221,10 @@ public abstract class AbstractPage {
 
 	public boolean isElementSelected(WebDriver driver, String xpathLocator) {
 		return findElement(driver, xpathLocator).isSelected();
+	}
+
+	public boolean isElementSelected(WebDriver driver, String xpathLocator, String... xpathValues) {
+		return findElement(driver, castToObject(xpathLocator, xpathValues)).isSelected();
 	}
 
 	public boolean isElementEnabled(WebDriver driver, String xpathLocator) {
