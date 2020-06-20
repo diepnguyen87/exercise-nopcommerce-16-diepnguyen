@@ -4,7 +4,9 @@
     <test name="Run on FIREFOX">
 		<classes>
 			<parameter name="browser" value="firefox" />
-			  <class name="com.nopcommerce.register.Register_01"/>
+<!-- 			  <class name="com.nopcommerce.register.Register_01"/> -->
+			  <class name="com.nopcommerce.login.Login_01"/>
+			  
 		</classes>
 	</test>
 

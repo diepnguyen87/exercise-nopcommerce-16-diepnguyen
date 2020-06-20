@@ -18,4 +18,10 @@ public class StartPageObject extends AbstractPage {
 		clickToElement(driver, StartPageUI.REGISTER_LINK);
 		return new RegisterPageObject(driver);
 	}
+
+	public LoginPageObject clickLoginLink() {
+		waitForElementVisible(driver, StartPageUI.LOGIN_LINK);
+		clickToElement(driver, StartPageUI.LOGIN_LINK);
+		return new LoginPageObject(driver);
+	}
 }
