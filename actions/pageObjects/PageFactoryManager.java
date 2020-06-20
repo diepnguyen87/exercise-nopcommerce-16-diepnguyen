@@ -7,5 +7,9 @@ public class PageFactoryManager {
 	public static HomePageObject getHomePageObject(WebDriver driver) {
 		return new HomePageObject(driver);
 	}
+	
+	public static StartPageObject getStartPageObject(WebDriver driver) {
+		return new StartPageObject(driver);
+	}
 		
 }

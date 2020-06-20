@@ -13,9 +13,9 @@ public class HomePageObject extends AbstractPage {
 		this.driver = driver;
 	}
 
-	public RegisterPageObject clickRegisterLink() {
-		waitForElementVisible(driver, HomePageUI.REGISTER_LINK);
-		clickToElement(driver, HomePageUI.REGISTER_LINK);
-		return new RegisterPageObject(driver);
+	public void clickContinueButton() {
+		waitForElementVisible(driver, HomePageUI.REGISTER_CONTINUE_BUTTON);
+		clickToElement(driver, HomePageUI.REGISTER_CONTINUE_BUTTON);
 	}
+	
 }

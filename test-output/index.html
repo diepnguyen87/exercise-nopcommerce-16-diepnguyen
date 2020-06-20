@@ -91,7 +91,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">1 method,   1 passed</span>
+                    <span class="method-stats">6 methods,   6 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -103,6 +103,31 @@
                       <span>
                         <img width="3%" src="passed.png"/>
                         <a href="#" class="method navigator-link" panel-name="suite-Nop_Commerce" title="com.nopcommerce.register.Register_01" hash-for-method="TC_01_registerWithEmptyData">TC_01_registerWithEmptyData</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Nop_Commerce" title="com.nopcommerce.register.Register_01" hash-for-method="TC_02_registerWithInvalidEmail">TC_02_registerWithInvalidEmail</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Nop_Commerce" title="com.nopcommerce.register.Register_01" hash-for-method="TC_03_registerWithExistedEmail">TC_03_registerWithExistedEmail</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Nop_Commerce" title="com.nopcommerce.register.Register_01" hash-for-method="TC_04_registerWithPasswordLessThan6Chars">TC_04_registerWithPasswordLessThan6Chars</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Nop_Commerce" title="com.nopcommerce.register.Register_01" hash-for-method="TC_05_registerWithConfirmPassworDoNotMatch">TC_05_registerWithConfirmPassworDoNotMatch</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img width="3%" src="passed.png"/>
+                        <a href="#" class="method navigator-link" panel-name="suite-Nop_Commerce" title="com.nopcommerce.register.Register_01" hash-for-method="TC_06_registerWithValidInformations">TC_06_registerWithValidInformations</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Nop_Commerce -->
@@ -128,6 +153,41 @@
                   <a name="TC_01_registerWithEmptyData">
                   </a> <!-- TC_01_registerWithEmptyData -->
                   <span class="method-name">TC_01_registerWithEmptyData</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TC_02_registerWithInvalidEmail">
+                  </a> <!-- TC_02_registerWithInvalidEmail -->
+                  <span class="method-name">TC_02_registerWithInvalidEmail</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TC_03_registerWithExistedEmail">
+                  </a> <!-- TC_03_registerWithExistedEmail -->
+                  <span class="method-name">TC_03_registerWithExistedEmail</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TC_04_registerWithPasswordLessThan6Chars">
+                  </a> <!-- TC_04_registerWithPasswordLessThan6Chars -->
+                  <span class="method-name">TC_04_registerWithPasswordLessThan6Chars</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TC_05_registerWithConfirmPassworDoNotMatch">
+                  </a> <!-- TC_05_registerWithConfirmPassworDoNotMatch -->
+                  <span class="method-name">TC_05_registerWithConfirmPassworDoNotMatch</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="TC_06_registerWithValidInformations">
+                  </a> <!-- TC_06_registerWithValidInformations -->
+                  <span class="method-name">TC_06_registerWithValidInformations</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
             </div> <!-- main-panel-content rounded-window-bottom -->
@@ -185,16 +245,36 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(1);
+data.addRows(6);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'TC_01_registerWithEmptyData')
+data.setCell(0, 1, 'TC_06_registerWithValidInformations')
 data.setCell(0, 2, 'com.nopcommerce.register.Register_01')
-data.setCell(0, 3, 1425);
+data.setCell(0, 3, 2823);
+data.setCell(1, 0, 1)
+data.setCell(1, 1, 'TC_01_registerWithEmptyData')
+data.setCell(1, 2, 'com.nopcommerce.register.Register_01')
+data.setCell(1, 3, 2311);
+data.setCell(2, 0, 2)
+data.setCell(2, 1, 'TC_02_registerWithInvalidEmail')
+data.setCell(2, 2, 'com.nopcommerce.register.Register_01')
+data.setCell(2, 3, 1794);
+data.setCell(3, 0, 3)
+data.setCell(3, 1, 'TC_03_registerWithExistedEmail')
+data.setCell(3, 2, 'com.nopcommerce.register.Register_01')
+data.setCell(3, 3, 1691);
+data.setCell(4, 0, 4)
+data.setCell(4, 1, 'TC_04_registerWithPasswordLessThan6Chars')
+data.setCell(4, 2, 'com.nopcommerce.register.Register_01')
+data.setCell(4, 3, 492);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'TC_05_registerWithConfirmPassworDoNotMatch')
+data.setCell(5, 2, 'com.nopcommerce.register.Register_01')
+data.setCell(5, 3, 418);
 window.suiteTableData['Nop_Commerce']= { tableData: data, tableDiv: 'times-div-Nop_Commerce'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 1 seconds</span>
+              <span class="suite-total-time">Total running time: 9 seconds</span>
               <div id="times-div-Nop_Commerce">
               </div> <!-- times-div-Nop_Commerce -->
             </div> <!-- times-div -->
@@ -227,11 +307,31 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">TC_01_registerWithEmptyData</span>
-                <span class="method-start">8653 ms</span>
+                <span class="method-start">8671 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">TC_02_registerWithInvalidEmail</span>
+                <span class="method-start">10988 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">TC_03_registerWithExistedEmail</span>
+                <span class="method-start">12784 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">TC_04_registerWithPasswordLessThan6Chars</span>
+                <span class="method-start">14477 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">TC_05_registerWithConfirmPassworDoNotMatch</span>
+                <span class="method-start">14972 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">TC_06_registerWithValidInformations</span>
+                <span class="method-start">15392 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">afterClass</span>
-                <span class="method-start">10081 ms</span>
+                <span class="method-start">18216 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

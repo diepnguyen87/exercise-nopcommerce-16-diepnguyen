@@ -8,6 +8,8 @@ import commons.AbstractTest;
 import pageObjects.HomePageObject;
 import pageObjects.PageFactoryManager;
 import pageObjects.RegisterPageObject;
+import pageObjects.StartPageObject;
+import pageUI.HomePageUI;
 import pageUI.RegisterPageUI;
 
 import org.testng.annotations.BeforeClass;
@@ -20,6 +22,7 @@ public class Register_01 extends AbstractTest {
 
 	private WebDriver driver;
 	private DriverManager driverManager;
+	private StartPageObject startObject;
 	private HomePageObject homeObject;
 	private RegisterPageObject registerObject;
 	
@@ -28,12 +31,12 @@ public class Register_01 extends AbstractTest {
 	public void beforeClass(String browserName) {
 		driverManager = BrowserDriverFactory.getBrowserDriver(browserName);
 		driver = driverManager.getDriver();
-		homeObject = PageFactoryManager.getHomePageObject(driver);
+		startObject = PageFactoryManager.getStartPageObject(driver);
 	}
 
 	@Test
 	public void TC_01_registerWithEmptyData() {
-		registerObject = homeObject.clickRegisterLink();
+		registerObject = startObject.clickRegisterLink();
 		registerObject.clickRegisterButton();
 
 		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.FIRSTNAME_ERROR_MESSAGE, "First name is required."));
@@ -71,7 +74,24 @@ public class Register_01 extends AbstractTest {
 		registerObject.inputPasword("12345");
 		registerObject.pressControlTab();
 		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.PASSWORD_ERROR_MESSAGE, "Password must meet the following rules:\nmust have at least 6 characters"));	
-			
+	}
+	
+	@Test
+	public void TC_05_registerWithConfirmPasswordDoNotMatch() {
+		registerObject.inputPasword("123456");
+		registerObject.inputConfirmPassword("1");
+		registerObject.pressControlTab();
+		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.CONFIRMPASSWORD_ERROR_MESSAGE, "The password and confirmation password do not match."));	
+	}
+	
+	@Test
+	public void TC_06_registerWithValidInformations() {
+		registerObject.inputConfirmPassword("123456");
+		registerObject.clickRegisterButton();
+		Assert.assertTrue(registerObject.isErrorMessageDisplayed(HomePageUI.REGISTER_RESULT, "Your registration completed"));	
+		
+		homeObject = PageFactoryManager.getHomePageObject(driver);
+		homeObject.clickContinueButton();
 	}
 	
 	@AfterClass

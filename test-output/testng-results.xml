@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results skipped="0" failed="0" ignored="0" total="1" passed="1">
+<testng-results skipped="0" failed="0" ignored="0" total="6" passed="6">
   <reporter-output>
   </reporter-output>
-  <suite name="Nop Commerce" duration-ms="10093" started-at="2020-06-19T09:41:45Z" finished-at="2020-06-19T09:41:56Z">
+  <suite name="Nop Commerce" duration-ms="18228" started-at="2020-06-20T09:40:27Z" finished-at="2020-06-20T09:40:45Z">
     <groups>
     </groups>
-    <test name="Run on FIREFOX" duration-ms="10093" started-at="2020-06-19T09:41:45Z" finished-at="2020-06-19T09:41:56Z">
+    <test name="Run on FIREFOX" duration-ms="18228" started-at="2020-06-20T09:40:27Z" finished-at="2020-06-20T09:40:45Z">
       <class name="com.nopcommerce.register.Register_01">
-        <test-method status="PASS" signature="beforeClass(java.lang.String)[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="beforeClass" is-config="true" duration-ms="8642" started-at="2020-06-19T09:41:45Z" finished-at="2020-06-19T09:41:54Z">
+        <test-method status="PASS" signature="beforeClass(java.lang.String)[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="beforeClass" is-config="true" duration-ms="8664" started-at="2020-06-20T09:40:27Z" finished-at="2020-06-20T09:40:35Z">
           <params>
             <param index="0">
               <value>
@@ -18,11 +18,31 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- beforeClass -->
-        <test-method status="PASS" signature="TC_01_registerWithEmptyData()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="TC_01_registerWithEmptyData" duration-ms="1425" started-at="2020-06-19T09:41:54Z" finished-at="2020-06-19T09:41:56Z">
+        <test-method status="PASS" signature="TC_01_registerWithEmptyData()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="TC_01_registerWithEmptyData" duration-ms="2311" started-at="2020-06-20T09:40:35Z" finished-at="2020-06-20T09:40:38Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- TC_01_registerWithEmptyData -->
-        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="afterClass" is-config="true" duration-ms="1" started-at="2020-06-19T09:41:56Z" finished-at="2020-06-19T09:41:56Z">
+        <test-method status="PASS" signature="TC_02_registerWithInvalidEmail()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="TC_02_registerWithInvalidEmail" duration-ms="1794" started-at="2020-06-20T09:40:38Z" finished-at="2020-06-20T09:40:39Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_02_registerWithInvalidEmail -->
+        <test-method status="PASS" signature="TC_03_registerWithExistedEmail()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="TC_03_registerWithExistedEmail" duration-ms="1691" started-at="2020-06-20T09:40:39Z" finished-at="2020-06-20T09:40:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_03_registerWithExistedEmail -->
+        <test-method status="PASS" signature="TC_04_registerWithPasswordLessThan6Chars()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="TC_04_registerWithPasswordLessThan6Chars" duration-ms="492" started-at="2020-06-20T09:40:41Z" finished-at="2020-06-20T09:40:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_04_registerWithPasswordLessThan6Chars -->
+        <test-method status="PASS" signature="TC_05_registerWithConfirmPassworDoNotMatch()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="TC_05_registerWithConfirmPassworDoNotMatch" duration-ms="418" started-at="2020-06-20T09:40:42Z" finished-at="2020-06-20T09:40:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_05_registerWithConfirmPassworDoNotMatch -->
+        <test-method status="PASS" signature="TC_06_registerWithValidInformations()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="TC_06_registerWithValidInformations" duration-ms="2823" started-at="2020-06-20T09:40:42Z" finished-at="2020-06-20T09:40:45Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TC_06_registerWithValidInformations -->
+        <test-method status="PASS" signature="afterClass()[pri:0, instance:com.nopcommerce.register.Register_01@1753acfe]" name="afterClass" is-config="true" duration-ms="1" started-at="2020-06-20T09:40:45Z" finished-at="2020-06-20T09:40:45Z">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- afterClass -->
