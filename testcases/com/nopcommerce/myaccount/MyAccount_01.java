@@ -11,6 +11,8 @@ import browsers.BrowserDriverFactory;
 import browsers.DriverManager;
 import commons.AbstractTest;
 import commons.GlobalConstants;
+import pageObjects.CustomerAddressesPageObject;
+import pageObjects.CustomerInfosPageObject;
 import pageObjects.HomePageObject;
 import pageObjects.MyAccountPageObject;
 import pageObjects.PageFactoryManager;
@@ -25,6 +27,8 @@ public class MyAccount_01 extends AbstractTest {
 	private RegisterPageObject registerObject;
 	private HomePageObject homeObject;
 	private MyAccountPageObject accountObject;
+	private CustomerInfosPageObject customerInfoObject;
+	private CustomerAddressesPageObject customerAddressObject;
 	private String email;
 	private String updatedGender = "female";
 	private String updatedFirstName = "Automation";
@@ -32,7 +36,7 @@ public class MyAccount_01 extends AbstractTest {
 	private String[] updateDOB = { "January", "1", "1999" };
 	private String updatedCompanyName = "Automation FC";
 	private String updatedEmail;
-	private String actualErrorMsg;
+	private String actualValue;
 
 	@Parameters("browser")
 	@BeforeClass
@@ -58,45 +62,104 @@ public class MyAccount_01 extends AbstractTest {
 	public void TC_01_updateCustomerInfos() {
 		// navigate to My Account
 		homeObject.navigateToPage_HeaderLink(driver, "account");
-		accountObject = PageFactoryManager.getMyAccountPageObject(driver);
+		customerInfoObject = PageFactoryManager.getCustomerInfosPageObject(driver);
 
 		// Update infos
-		accountObject.updateGender(updatedGender);
-		accountObject.updateFirstName(updatedFirstName);
-		accountObject.updateLastName(updatedLastName);
-		accountObject.updateDateOfBirth(updateDOB[0], updateDOB[1], updateDOB[2]);
+		customerInfoObject.updateGender(updatedGender);
+		customerInfoObject.updateFirstName(updatedFirstName);
+		customerInfoObject.updateLastName(updatedLastName);
+		customerInfoObject.updateDateOfBirth(updateDOB[0], updateDOB[1], updateDOB[2]);
 		updatedEmail = createRandomEmail("automationfc", "vn");
-		accountObject.updateEmail(updatedEmail);
-		accountObject.updateCompanyName(updatedCompanyName);
+		customerInfoObject.updateEmail(updatedEmail);
+		customerInfoObject.updateCompanyName(updatedCompanyName);
 
 		// save updated infos
-		accountObject.clickSaveButton();
+		customerInfoObject.clickSaveButton();
 
 		// Verify infos after updated
-		actualErrorMsg = accountObject.getValueOfField("female");
-		Assert.assertEquals(actualErrorMsg, updatedGender);
+		actualValue = customerInfoObject.getValueOfField("female");
+		Assert.assertEquals(actualValue, updatedGender);
 
-		actualErrorMsg = accountObject.getValueOfField("first name");
-		Assert.assertEquals(actualErrorMsg, updatedFirstName);
+		actualValue = customerInfoObject.getValueOfField("first name");
+		Assert.assertEquals(actualValue, updatedFirstName);
 
-		actualErrorMsg = accountObject.getValueOfField("last name");
-		verifyEquals(actualErrorMsg, updatedLastName);
+		actualValue = customerInfoObject.getValueOfField("last name");
+		verifyEquals(actualValue, updatedLastName);
 
-		actualErrorMsg = accountObject.getValueOfField("birth day");
-		verifyEquals(actualErrorMsg, updateDOB[1]);
+		actualValue = customerInfoObject.getValueOfField("birth day");
+		verifyEquals(actualValue, updateDOB[1]);
 
-		actualErrorMsg = accountObject.getValueOfField("birth month");
-		verifyEquals(actualErrorMsg, updateDOB[0]);
+		actualValue = customerInfoObject.getValueOfField("birth month");
+		verifyEquals(actualValue, updateDOB[0]);
 
-		actualErrorMsg = accountObject.getValueOfField("birth year");
-		verifyEquals(actualErrorMsg, updateDOB[2]);
+		actualValue = customerInfoObject.getValueOfField("birth year");
+		verifyEquals(actualValue, updateDOB[2]);
 
-		actualErrorMsg = accountObject.getValueOfField("email");
-		verifyEquals(actualErrorMsg, updatedEmail);
+		actualValue = customerInfoObject.getValueOfField("email");
+		verifyEquals(actualValue, updatedEmail);
 
-		actualErrorMsg = accountObject.getValueOfField("company");
-		verifyEquals(actualErrorMsg, updatedCompanyName);
+		actualValue = customerInfoObject.getValueOfField("company");
+		verifyEquals(actualValue, updatedCompanyName);
+	}
 
+	@Test
+	public void TC_02_addAddress() {
+		// navigate to Customer Addresses
+		homeObject.navigateToPage_ContentList(driver, "/customer/addresses");
+		customerAddressObject = PageFactoryManager.getCustomerAddressesPageObject(driver);
+
+		//click add new
+		customerAddressObject.clickAddNewButton();
+		
+		//enter new address
+		customerAddressObject.inputNewInfos("FirstName", "Automation");
+		customerAddressObject.inputNewInfos("LastName", "FC");
+		customerAddressObject.inputNewInfos("Email", "automationfc.vn@gmail.com");
+		customerAddressObject.inputNewInfos("Company", "Automation FC");
+		
+		customerAddressObject.selectNewInfos("CountryId", "Viet Nam");
+		customerAddressObject.selectNewInfos("StateProvinceId", "Other");
+				
+		customerAddressObject.inputNewInfos("City", "Da Nang");
+		customerAddressObject.inputNewInfos("Address1", "123/01 Le Lai");
+		customerAddressObject.inputNewInfos("Address2", "234/05 Hai Phong");
+		customerAddressObject.inputNewInfos("ZipPostalCode", "550000");
+		customerAddressObject.inputNewInfos("PhoneNumber", "0123456789");
+		customerAddressObject.inputNewInfos("FaxNumber", "0987654321");
+		
+		//click save
+		customerAddressObject.clickSaveButton();
+		
+		//Verify address
+		actualValue = customerAddressObject.getCustomerName("Automation FC", "name");
+		verifyTrue(actualValue.contains("Automation FC"));
+				
+		actualValue = customerAddressObject.getCustomerName("Automation FC", "email");
+		verifyTrue(actualValue.contains("automationfc.vn@gmail.com"));
+		
+		actualValue = customerAddressObject.getCustomerName("Automation FC", "phone");
+		verifyTrue(actualValue.contains("0123456789"));
+		
+		actualValue = customerAddressObject.getCustomerName("Automation FC", "fax");
+		verifyTrue(actualValue.contains("0987654321"));
+		
+		actualValue = customerAddressObject.getCustomerName("Automation FC", "company");
+		verifyTrue(actualValue.contains("Automation FC"));
+		
+		actualValue = customerAddressObject.getCustomerName("Automation FC", "address1");
+		verifyTrue(actualValue.contains("123/01 Le Lai"));
+		
+		actualValue = customerAddressObject.getCustomerName("Automation FC", "address2");
+		verifyTrue(actualValue.contains("234/05 Hai Phong"));
+		
+		actualValue = customerAddressObject.getCustomerName("Automation FC", "city-state-zip");
+		verifyTrue(actualValue.contains("Da Nang, 550000"));
+		
+		actualValue = customerAddressObject.getCustomerName("Automation FC", "country");
+		verifyTrue(actualValue.contains("Viet Nam"));
+		
+		
+		
 	}
 
 	@AfterClass

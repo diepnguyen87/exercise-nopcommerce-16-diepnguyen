@@ -23,5 +23,13 @@ public class PageFactoryManager {
 	public static MyAccountPageObject getMyAccountPageObject(WebDriver driver) {
 		return new MyAccountPageObject(driver);
 	}
-		
+	
+	public static CustomerInfosPageObject getCustomerInfosPageObject(WebDriver driver) {
+		return new CustomerInfosPageObject(driver);
+	}
+
+	public static CustomerAddressesPageObject getCustomerAddressesPageObject(WebDriver driver) {
+		return new CustomerAddressesPageObject(driver);
+	}
+
 }

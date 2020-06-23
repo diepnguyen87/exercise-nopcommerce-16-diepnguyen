@@ -14,11 +14,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import pageUI.AbstractPageUI;
+import pageUI.MyAccountPageUI;
 
 public abstract class AbstractPage {
 
-	public String castToObject(String xpathLocator, String... xpathValues) {
-		return String.format(xpathLocator, (Object[]) xpathValues);
+	public String castToObject(String xpathLocator, String... xpathParams) {
+		return String.format(xpathLocator, (Object[]) xpathParams);
 	}
 
 //	public AbstractPage navigateToPage_LessMenu(WebDriver driver, String pageName ) {
@@ -34,7 +35,13 @@ public abstract class AbstractPage {
 		waitForElementClickable(driver, AbstractPageUI.HEADER_LINK, pageName);
 		clickToElement(driver, AbstractPageUI.HEADER_LINK, pageName);
 	}
-
+	
+	public void navigateToPage_ContentList(WebDriver driver, String pageName) {
+		waitForElementClickable(driver, MyAccountPageUI.CONTENT_LIST, pageName);
+		clickToElement(driver, MyAccountPageUI.CONTENT_LIST, pageName);
+	}
+	
+	
 	public boolean isPageLoaded(WebDriver driver, String pageURL) {
 		String actualURL = getCurrentURL(driver);
 		return actualURL.endsWith(pageURL);
@@ -123,16 +130,16 @@ public abstract class AbstractPage {
 		return driver.findElement(byXpath(driver, xpathLocator));
 	}
 
-	public WebElement findElement(WebDriver driver, String xpathLocator, String... xpathValues) {
-		return driver.findElement(byXpath(driver, castToObject(xpathLocator, xpathValues)));
+	public WebElement findElement(WebDriver driver, String xpathLocator, String... xpathParams) {
+		return driver.findElement(byXpath(driver, castToObject(xpathLocator, xpathParams)));
 	}
 
 	public List<WebElement> findElements(WebDriver driver, String xpathLocator) {
 		return driver.findElements(byXpath(driver, xpathLocator));
 	}
 
-	public void clickToElement(WebDriver driver, String xpathLocator, String... xpathValues) {
-		findElement(driver, castToObject(xpathLocator, xpathValues)).click();
+	public void clickToElement(WebDriver driver, String xpathLocator, String... xpathParams) {
+		findElement(driver, castToObject(xpathLocator, xpathParams)).click();
 	}
 
 	public void clickToElement(WebDriver driver, String xpathLocator) {
@@ -145,8 +152,8 @@ public abstract class AbstractPage {
 		element.sendKeys(value);
 	}
 
-	public void sendKeyToElement(WebDriver driver, String xpathLocator, String value, String... xpathValues) {
-		element = findElement(driver, castToObject(xpathLocator, xpathValues));
+	public void sendKeyToElement(WebDriver driver, String xpathLocator, String value, String... xpathParams) {
+		element = findElement(driver, castToObject(xpathLocator, xpathParams));
 		element.clear();
 		element.sendKeys(value);
 	}
@@ -155,12 +162,16 @@ public abstract class AbstractPage {
 		new Select(findElement(driver, xpathLocator)).selectByVisibleText(selectedText);
 	}
 
+	public void selectItemInDropdown(WebDriver driver, String xpathLocator, String selectedText, String... xpathParams) {
+		new Select(findElement(driver, castToObject(xpathLocator, xpathParams))).selectByVisibleText(selectedText);
+	}
+
 	public WebElement getSelectedItemInDropdown(WebDriver driver, String xpathLocator) {
 		return new Select(findElement(driver, xpathLocator)).getFirstSelectedOption();
 	}
 
-	public WebElement getSelectedItemInDropdown(WebDriver driver, String xpathLocator, String... xpathValues) {
-		return new Select(findElement(driver, castToObject(xpathLocator, xpathValues))).getFirstSelectedOption();
+	public WebElement getSelectedItemInDropdown(WebDriver driver, String xpathLocator, String... xpathParams) {
+		return new Select(findElement(driver, castToObject(xpathLocator, xpathParams))).getFirstSelectedOption();
 	}
 
 	public boolean isDropdownMultiple(WebDriver driver, String xpathLocator) {
@@ -190,12 +201,16 @@ public abstract class AbstractPage {
 		return findElement(driver, xpathLocator).getText().trim();
 	}
 
+	public String getElementText(WebDriver driver, String xpathLocator, String... xpathParams) {
+		return findElement(driver, castToObject(xpathLocator, xpathParams)).getText().trim();
+	}
+
 	public int countElementNumber(WebDriver driver, String xpathLocator) {
 		return findElements(driver, xpathLocator).size();
 	}
 
-	public int countElementNumber(WebDriver driver, String xpathLocator, String... xpathValues) {
-		return findElements(driver, castToObject(xpathLocator, xpathValues)).size();
+	public int countElementNumber(WebDriver driver, String xpathLocator, String... xpathParams) {
+		return findElements(driver, castToObject(xpathLocator, xpathParams)).size();
 	}
 
 	public void checkTheCheckbox(WebDriver driver, String xpathLocator) {
@@ -212,8 +227,8 @@ public abstract class AbstractPage {
 		}
 	}
 
-	public boolean isElementDisplayed(WebDriver driver, String xpathLocator, String... xpathValues) {
-		return findElement(driver, castToObject(xpathLocator, xpathValues)).isDisplayed();
+	public boolean isElementDisplayed(WebDriver driver, String xpathLocator, String... xpathParams) {
+		return findElement(driver, castToObject(xpathLocator, xpathParams)).isDisplayed();
 	}
 
 	public boolean isElementDisplayed(WebDriver driver, String xpathLocator) {
@@ -224,8 +239,8 @@ public abstract class AbstractPage {
 		return findElement(driver, xpathLocator).isSelected();
 	}
 
-	public boolean isElementSelected(WebDriver driver, String xpathLocator, String... xpathValues) {
-		return findElement(driver, castToObject(xpathLocator, xpathValues)).isSelected();
+	public boolean isElementSelected(WebDriver driver, String xpathLocator, String... xpathParams) {
+		return findElement(driver, castToObject(xpathLocator, xpathParams)).isSelected();
 	}
 
 	public boolean isElementEnabled(WebDriver driver, String xpathLocator) {
@@ -265,9 +280,9 @@ public abstract class AbstractPage {
 		action.sendKeys(findElement(driver, xpathLocator), key).perform();
 	}
 
-	public void sendKeyboardToElement(WebDriver driver, String xpathLocator, Keys key, String... xpathValues) {
+	public void sendKeyboardToElement(WebDriver driver, String xpathLocator, Keys key, String... xpathParams) {
 		action = new Actions(driver);
-		action.sendKeys(findElement(driver, castToObject(xpathLocator, xpathValues)), key).perform();
+		action.sendKeys(findElement(driver, castToObject(xpathLocator, xpathParams)), key).perform();
 	}
 
 	public Object executeJavaScriptToBrowser(WebDriver driver, String javaSript) {
@@ -344,14 +359,14 @@ public abstract class AbstractPage {
 		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(byXpath(driver, xpathLocator)));
 	}
 
-	public void waitForElementVisible(WebDriver driver, String xpathLocator, String... xpathValues) {
+	public void waitForElementVisible(WebDriver driver, String xpathLocator, String... xpathParams) {
 		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
-		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(byXpath(driver, castToObject(xpathLocator, xpathValues))));
+		explicitWait.until(ExpectedConditions.visibilityOfElementLocated(byXpath(driver, castToObject(xpathLocator, xpathParams))));
 	}
 
-	public void waitForElementClickable(WebDriver driver, String xpathLocator, String... xpathValues) {
+	public void waitForElementClickable(WebDriver driver, String xpathLocator, String... xpathParams) {
 		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
-		explicitWait.until(ExpectedConditions.elementToBeClickable(byXpath(driver, castToObject(xpathLocator, xpathValues))));
+		explicitWait.until(ExpectedConditions.elementToBeClickable(byXpath(driver, castToObject(xpathLocator, xpathParams))));
 	}
 
 	public void waitForElementClickable(WebDriver driver, String xpathLocator) {
