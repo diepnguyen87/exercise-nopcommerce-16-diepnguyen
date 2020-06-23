@@ -57,7 +57,7 @@ public class Login_01 extends AbstractTest {
 	
 	@Test
 	public void TC_04_loginWithEmptyPassword() {
-		loginObject.inputEmail(GlobalConstants.email);
+		loginObject.inputEmail(GlobalConstants.EMAIL);
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
 		verifyEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
@@ -65,7 +65,7 @@ public class Login_01 extends AbstractTest {
 	
 	@Test
 	public void TC_05_loginWithIncorrectPassword() {
-		loginObject.inputEmail(GlobalConstants.email);
+		loginObject.inputEmail(GlobalConstants.EMAIL);
 		loginObject.inputPassword("123457");
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
@@ -74,7 +74,7 @@ public class Login_01 extends AbstractTest {
 	
 	@Test
 	public void TC_06_loginWithValidInformations() {
-		loginObject.inputPassword(GlobalConstants.password);
+		loginObject.inputPassword(GlobalConstants.PASSWORD);
 		loginObject.clickLoginButton();
 		verifyTrue(loginObject.isMyAccountDisplayed());
 	}

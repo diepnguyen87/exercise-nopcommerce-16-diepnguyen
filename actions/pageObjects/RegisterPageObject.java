@@ -4,6 +4,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPage;
+import commons.GlobalConstants;
 import pageUI.RegisterPageUI;
 
 public class RegisterPageObject extends AbstractPage {
@@ -61,7 +62,13 @@ public class RegisterPageObject extends AbstractPage {
 		sendKeyboardToElement(driver, RegisterPageUI.PASSWORD_TEXTBOX, Keys.TAB);
 	}
 
-//	public String createRandomEmail(String firstName, String lastName) {
-//		return firstName+"."+lastName+getRandomNumber()+"@gmail.com";
-//	}
+	public HomePageObject register(String firstName, String lastName, String email, String password) {
+		inputFirstName(firstName);
+		inputLastName(lastName);
+		inputEmail(email);
+		inputPasword(password);
+		inputConfirmPassword(password);
+		clickRegisterButton();
+		return PageFactoryManager.getHomePageObject(driver);
+	}
 }

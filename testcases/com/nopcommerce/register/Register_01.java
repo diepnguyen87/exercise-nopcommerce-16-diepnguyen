@@ -48,8 +48,8 @@ public class Register_01 extends AbstractTest {
 
 	@Test
 	public void TC_02_registerWithInvalidEmail() {
-		registerObject.inputFirstName(GlobalConstants.fistName);
-		registerObject.inputLastName(GlobalConstants.lastName);
+		registerObject.inputFirstName(GlobalConstants.FIRSTNAME);
+		registerObject.inputLastName(GlobalConstants.LASTNAME);
 		registerObject.inputEmail("123@123.123");
 		registerObject.inputPasword("123456");
 		registerObject.inputConfirmPassword("123456");

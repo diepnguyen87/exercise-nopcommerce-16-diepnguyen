@@ -43,5 +43,12 @@ public class LoginPageObject extends AbstractPage {
 		waitForElementVisible(driver, AbstractPageUI.HEADER_LINK, "account");
 		return isElementDisplayed(driver, AbstractPageUI.HEADER_LINK, "account");
 	}
+	
+	public HomePageObject login(String email, String password) {
+		inputEmail(email);
+		inputPassword(password);
+		clickLoginButton();
+		return PageFactoryManager.getHomePageObject(driver);
+	}
 
 }

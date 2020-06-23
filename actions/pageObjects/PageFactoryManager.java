@@ -31,5 +31,10 @@ public class PageFactoryManager {
 	public static CustomerAddressesPageObject getCustomerAddressesPageObject(WebDriver driver) {
 		return new CustomerAddressesPageObject(driver);
 	}
+	
+	public static CustomerChangePasswordPageObject getCustomerChangePasswordPageObject(WebDriver driver) {
+		return new CustomerChangePasswordPageObject(driver);
+	}
+	
 
 }

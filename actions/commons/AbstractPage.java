@@ -13,6 +13,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageObjects.HomePageObject;
+import pageObjects.PageFactoryManager;
+import pageObjects.StartPageObject;
 import pageUI.AbstractPageUI;
 import pageUI.MyAccountPageUI;
 
@@ -31,6 +34,11 @@ public abstract class AbstractPage {
 //		}
 //	}
 
+	public StartPageObject logout(WebDriver driver) {
+		navigateToPage_HeaderLink(driver, "logout");
+		return PageFactoryManager.getStartPageObject(driver);
+	}
+	
 	public void navigateToPage_HeaderLink(WebDriver driver, String pageName) {
 		waitForElementClickable(driver, AbstractPageUI.HEADER_LINK, pageName);
 		clickToElement(driver, AbstractPageUI.HEADER_LINK, pageName);
