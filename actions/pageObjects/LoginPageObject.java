@@ -3,13 +3,13 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPage;
-import pageUI.HomePageUI;
+import pageUI.AbstractPageUI;
 import pageUI.LoginPageUI;
 
 public class LoginPageObject extends AbstractPage {
 
 	private WebDriver driver;
-	
+
 	public LoginPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -36,12 +36,12 @@ public class LoginPageObject extends AbstractPage {
 
 	public void inputPassword(String password) {
 		waitForElementVisible(driver, LoginPageUI.PASSWORD_TEXTBOX);
-		sendKeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);	
+		sendKeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);
 	}
 
 	public boolean isMyAccountDisplayed() {
-		waitForElementVisible(driver, HomePageUI.MY_ACCOUNT_LINK);
-		return isElementDisplayed(driver, HomePageUI.MY_ACCOUNT_LINK);
+		waitForElementVisible(driver, AbstractPageUI.HEADER_LINK, "account");
+		return isElementDisplayed(driver, AbstractPageUI.HEADER_LINK, "account");
 	}
 
 }

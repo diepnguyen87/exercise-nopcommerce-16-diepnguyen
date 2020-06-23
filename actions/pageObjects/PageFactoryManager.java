@@ -8,6 +8,14 @@ public class PageFactoryManager {
 		return new HomePageObject(driver);
 	}
 	
+	public static LoginPageObject getLoginPageObject(WebDriver driver) {
+		return new LoginPageObject(driver);
+	}
+	
+	public static RegisterPageObject getRegisterPageObject(WebDriver driver) {
+		return new RegisterPageObject(driver);
+	}
+	
 	public static StartPageObject getStartPageObject(WebDriver driver) {
 		return new StartPageObject(driver);
 	}

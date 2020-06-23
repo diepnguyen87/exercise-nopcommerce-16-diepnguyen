@@ -13,15 +13,15 @@ public class StartPageObject extends AbstractPage {
 		this.driver = driver;
 	}
 
-	public RegisterPageObject clickRegisterLink() {
-		waitForElementVisible(driver, StartPageUI.REGISTER_LINK);
-		clickToElement(driver, StartPageUI.REGISTER_LINK);
-		return new RegisterPageObject(driver);
-	}
+//	public RegisterPageObject clickRegisterLink() {
+//		waitForElementVisible(driver, StartPageUI.REGISTER_LINK);
+//		clickToElement(driver, StartPageUI.REGISTER_LINK);
+//		return new RegisterPageObject(driver);
+//	}
 
-	public LoginPageObject clickLoginLink() {
-		waitForElementVisible(driver, StartPageUI.LOGIN_LINK);
-		clickToElement(driver, StartPageUI.LOGIN_LINK);
-		return new LoginPageObject(driver);
-	}
+//	public LoginPageObject clickLoginLink() {
+//		waitForElementVisible(driver, StartPageUI.LOGIN_LINK);
+//		clickToElement(driver, StartPageUI.LOGIN_LINK);
+//		return new LoginPageObject(driver);
+//	}
 }

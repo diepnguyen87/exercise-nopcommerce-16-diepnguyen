@@ -13,13 +13,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import pageUI.AbstractPageUI;
 
 public abstract class AbstractPage {
-	
+
 	public String castToObject(String xpathLocator, String... xpathValues) {
-		return String.format(xpathLocator, (Object[])xpathValues);
+		return String.format(xpathLocator, (Object[]) xpathValues);
 	}
-	
+
 //	public AbstractPage navigateToPage_LessMenu(WebDriver driver, String pageName ) {
 //		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_PAGE, pageName);
 //		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE, pageName);
@@ -29,17 +30,16 @@ public abstract class AbstractPage {
 //		}
 //	}
 
-//	public void navigateToPage(WebDriver driver, String pageName ) {
-//		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_PAGE, pageName);
-//		waitfor
-//		clickToElement(driver, AbstractPageUI.DYNAMIC_PAGE, pageName);
-//	}
+	public void navigateToPage_HeaderLink(WebDriver driver, String pageName) {
+		waitForElementClickable(driver, AbstractPageUI.HEADER_LINK, pageName);
+		clickToElement(driver, AbstractPageUI.HEADER_LINK, pageName);
+	}
 
 	public boolean isPageLoaded(WebDriver driver, String pageURL) {
 		String actualURL = getCurrentURL(driver);
 		return actualURL.endsWith(pageURL);
 	}
-	
+
 	public void openURL(WebDriver driver, String url) {
 		driver.get(url);
 	}
@@ -122,11 +122,11 @@ public abstract class AbstractPage {
 	public WebElement findElement(WebDriver driver, String xpathLocator) {
 		return driver.findElement(byXpath(driver, xpathLocator));
 	}
-	
+
 	public WebElement findElement(WebDriver driver, String xpathLocator, String... xpathValues) {
 		return driver.findElement(byXpath(driver, castToObject(xpathLocator, xpathValues)));
 	}
-	
+
 	public List<WebElement> findElements(WebDriver driver, String xpathLocator) {
 		return driver.findElements(byXpath(driver, xpathLocator));
 	}
@@ -134,18 +134,17 @@ public abstract class AbstractPage {
 	public void clickToElement(WebDriver driver, String xpathLocator, String... xpathValues) {
 		findElement(driver, castToObject(xpathLocator, xpathValues)).click();
 	}
-	
+
 	public void clickToElement(WebDriver driver, String xpathLocator) {
 		findElement(driver, xpathLocator).click();
 	}
-	
 
 	public void sendKeyToElement(WebDriver driver, String xpathLocator, String value) {
 		element = findElement(driver, xpathLocator);
 		element.clear();
 		element.sendKeys(value);
 	}
-	
+
 	public void sendKeyToElement(WebDriver driver, String xpathLocator, String value, String... xpathValues) {
 		element = findElement(driver, castToObject(xpathLocator, xpathValues));
 		element.clear();
@@ -159,7 +158,7 @@ public abstract class AbstractPage {
 	public WebElement getSelectedItemInDropdown(WebDriver driver, String xpathLocator) {
 		return new Select(findElement(driver, xpathLocator)).getFirstSelectedOption();
 	}
-	
+
 	public WebElement getSelectedItemInDropdown(WebDriver driver, String xpathLocator, String... xpathValues) {
 		return new Select(findElement(driver, castToObject(xpathLocator, xpathValues))).getFirstSelectedOption();
 	}
@@ -194,11 +193,10 @@ public abstract class AbstractPage {
 	public int countElementNumber(WebDriver driver, String xpathLocator) {
 		return findElements(driver, xpathLocator).size();
 	}
-	
+
 	public int countElementNumber(WebDriver driver, String xpathLocator, String... xpathValues) {
 		return findElements(driver, castToObject(xpathLocator, xpathValues)).size();
 	}
-	
 
 	public void checkTheCheckbox(WebDriver driver, String xpathLocator) {
 		element = findElement(driver, xpathLocator);
@@ -355,7 +353,7 @@ public abstract class AbstractPage {
 		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.elementToBeClickable(byXpath(driver, castToObject(xpathLocator, xpathValues))));
 	}
-	
+
 	public void waitForElementClickable(WebDriver driver, String xpathLocator) {
 		explicitWait = new WebDriverWait(driver, GlobalConstants.LONG_TIMEOUT);
 		explicitWait.until(ExpectedConditions.elementToBeClickable(byXpath(driver, xpathLocator)));
@@ -378,7 +376,7 @@ public abstract class AbstractPage {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private WebDriverWait explicitWait;
 	private WebElement element;
 	private JavascriptExecutor jsExecutor;

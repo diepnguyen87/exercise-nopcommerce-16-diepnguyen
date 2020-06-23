@@ -40,7 +40,8 @@ public class MyAccount_01 extends AbstractTest {
 		driverManager = BrowserDriverFactory.getBrowserDriver(browserName);
 		driver = driverManager.getDriver();
 		startObject = PageFactoryManager.getStartPageObject(driver);
-		registerObject = startObject.clickRegisterLink();
+		startObject.navigateToPage_HeaderLink(driver, "register");
+		registerObject = PageFactoryManager.getRegisterPageObject(driver);
 
 		// register + login success
 		email = createRandomEmail(GlobalConstants.fistName, GlobalConstants.lastName);
@@ -56,7 +57,8 @@ public class MyAccount_01 extends AbstractTest {
 	@Test
 	public void TC_01_updateCustomerInfos() {
 		// navigate to My Account
-		accountObject = homeObject.clickMyAccountLink();
+		homeObject.navigateToPage_HeaderLink(driver, "account");
+		accountObject = PageFactoryManager.getMyAccountPageObject(driver);
 
 		// Update infos
 		accountObject.updateGender(updatedGender);

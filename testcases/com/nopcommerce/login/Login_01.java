@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 import browsers.BrowserDriverFactory;
 import browsers.DriverManager;
 import commons.AbstractTest;
+import commons.GlobalConstants;
 import pageObjects.LoginPageObject;
 import pageObjects.PageFactoryManager;
 import pageObjects.StartPageObject;
@@ -31,7 +32,8 @@ public class Login_01 extends AbstractTest {
 	
 	@Test
 	public void TC_01_loginWithEmptyData() {
-		loginObject = startObject.clickLoginLink();
+		startObject.navigateToPage_HeaderLink(driver, "login");
+		loginObject = PageFactoryManager.getLoginPageObject(driver);
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getEmailErrorMsg();
 		verifyEquals(actualErrorMsg, "Please enter your email");
@@ -55,7 +57,7 @@ public class Login_01 extends AbstractTest {
 	
 	@Test
 	public void TC_04_loginWithEmptyPassword() {
-		loginObject.inputEmail("diep.test200@gmail.com");
+		loginObject.inputEmail(GlobalConstants.email);
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
 		verifyEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
@@ -63,7 +65,7 @@ public class Login_01 extends AbstractTest {
 	
 	@Test
 	public void TC_05_loginWithIncorrectPassword() {
-		loginObject.inputEmail("diep.test200@gmail.com");
+		loginObject.inputEmail(GlobalConstants.email);
 		loginObject.inputPassword("123457");
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
@@ -72,7 +74,7 @@ public class Login_01 extends AbstractTest {
 	
 	@Test
 	public void TC_06_loginWithValidInformations() {
-		loginObject.inputPassword("123456");
+		loginObject.inputPassword(GlobalConstants.password);
 		loginObject.clickLoginButton();
 		verifyTrue(loginObject.isMyAccountDisplayed());
 	}
