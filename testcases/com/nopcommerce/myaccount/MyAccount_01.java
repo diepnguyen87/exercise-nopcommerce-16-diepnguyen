@@ -16,7 +16,6 @@ import pageObjects.CustomerChangePasswordPageObject;
 import pageObjects.CustomerInfosPageObject;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
-import pageObjects.MyAccountPageObject;
 import pageObjects.PageFactoryManager;
 import pageObjects.RegisterPageObject;
 import pageObjects.StartPageObject;
@@ -29,7 +28,6 @@ public class MyAccount_01 extends AbstractTest {
 	private LoginPageObject loginObject;
 	private RegisterPageObject registerObject;
 	private HomePageObject homeObject;
-	private MyAccountPageObject accountObject;
 	private CustomerInfosPageObject customerInfoObject;
 	private CustomerAddressesPageObject customerAddressObject;
 	private CustomerChangePasswordPageObject changePasswordObject;
@@ -56,12 +54,6 @@ public class MyAccount_01 extends AbstractTest {
 
 		// register + login success
 		email = createRandomEmail(GlobalConstants.FIRSTNAME, GlobalConstants.LASTNAME);
-//		registerObject.inputFirstName(GlobalConstants.FIRSTNAME);
-//		registerObject.inputLastName(GlobalConstants.LASTNAME);
-//		registerObject.inputEmail(email);
-//		registerObject.inputPasword("123456");
-//		registerObject.inputConfirmPassword("123456");
-//		registerObject.clickRegisterButton();
 		registerObject.register(GlobalConstants.FIRSTNAME, GlobalConstants.LASTNAME, email, password);
 		GlobalConstants.EMAIL = email;
 		homeObject = PageFactoryManager.getHomePageObject(driver);

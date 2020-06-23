@@ -16,7 +16,7 @@ public class CustomerInfosPageObject extends AbstractPage {
 	}
 
 	public void updateGender(String gender) {
-		String genderXpath = castToObject(CustomerInfosPageUI.GENDER_RADIO_BUTTON, gender);
+		String genderXpath = castToObject(CustomerInfosPageUI.DYNAMIC_GENDER_RADIO_BUTTON, gender);
 		waitForElementVisible(driver, genderXpath);
 		if (!isElementSelected(driver, genderXpath)) {
 			clickToElement(driver, genderXpath);
@@ -34,13 +34,13 @@ public class CustomerInfosPageObject extends AbstractPage {
 	}
 
 	public void updateDateOfBirth(String month, String day, String year) {
-		select = new Select(findElement(driver, CustomerInfosPageUI.DOB_SELECT, "Day"));
+		select = new Select(findElement(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, "Day"));
 		select.selectByVisibleText(day);
 
-		select = new Select(findElement(driver, CustomerInfosPageUI.DOB_SELECT, "Month"));
+		select = new Select(findElement(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, "Month"));
 		select.selectByVisibleText(month);
 
-		select = new Select(findElement(driver, CustomerInfosPageUI.DOB_SELECT, "Year"));
+		select = new Select(findElement(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, "Year"));
 		select.selectByVisibleText(year);
 
 	}
@@ -65,9 +65,8 @@ public class CustomerInfosPageObject extends AbstractPage {
 		String value = "";
 		switch (fieldName) {
 		case "female":
-			waitForElementVisible(driver, CustomerInfosPageUI.GENDER_RADIO_BUTTON, "female");
-//			System.out.println(isElementSelected(driver, MyAccountPageUI.GENDER_RADIO_BUTTON, "female"));
-			if (isElementSelected(driver, CustomerInfosPageUI.GENDER_RADIO_BUTTON, "female")) {
+			waitForElementVisible(driver, CustomerInfosPageUI.DYNAMIC_GENDER_RADIO_BUTTON, "female");
+			if (isElementSelected(driver, CustomerInfosPageUI.DYNAMIC_GENDER_RADIO_BUTTON, "female")) {
 				value = "female";
 			}
 			break;
@@ -80,16 +79,16 @@ public class CustomerInfosPageObject extends AbstractPage {
 			value = getAttributeValue(driver, CustomerInfosPageUI.LAST_NAME_TEXTBOX, "value");
 			break;
 		case "birth day":
-			waitForElementVisible(driver, CustomerInfosPageUI.DOB_SELECT, "Day");
-			value = getSelectedItemInDropdown(driver, CustomerInfosPageUI.DOB_SELECT, "Day").getText();
+			waitForElementVisible(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, "Day");
+			value = getSelectedItemInDropdown(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, "Day").getText();
 			break;
 		case "birth month":
-			waitForElementVisible(driver, CustomerInfosPageUI.DOB_SELECT, "Month");
-			value = getSelectedItemInDropdown(driver, CustomerInfosPageUI.DOB_SELECT, "Month").getText();
+			waitForElementVisible(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, "Month");
+			value = getSelectedItemInDropdown(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, "Month").getText();
 			break;
 		case "birth year":
-			waitForElementVisible(driver, CustomerInfosPageUI.DOB_SELECT, "Year");
-			value = getSelectedItemInDropdown(driver, CustomerInfosPageUI.DOB_SELECT, "Year").getText();
+			waitForElementVisible(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, "Year");
+			value = getSelectedItemInDropdown(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, "Year").getText();
 			break;
 		case "email":
 			waitForElementVisible(driver, CustomerInfosPageUI.EMAIL_TEXTBOX);
