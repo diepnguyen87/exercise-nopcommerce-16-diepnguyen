@@ -9,11 +9,12 @@ import org.testng.annotations.Test;
 
 import browsers.BrowserDriverFactory;
 import browsers.DriverManager;
+import commons.AbstractTest;
 import pageObjects.LoginPageObject;
 import pageObjects.PageFactoryManager;
 import pageObjects.StartPageObject;
 
-public class Login_01 {
+public class Login_01 extends AbstractTest {
 
 	private WebDriver driver;
 	private DriverManager driverManager;
@@ -34,7 +35,7 @@ public class Login_01 {
 		loginObject = startObject.clickLoginLink();
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getEmailErrorMsg();
-		Assert.assertEquals(actualErrorMsg, "Please enter your email");
+		verifyEquals(actualErrorMsg, "Please enter your email");
 	}
 
 	@Test
@@ -42,7 +43,7 @@ public class Login_01 {
 		loginObject.inputEmail("123@123.123");
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getEmailErrorMsg();
-		Assert.assertEquals(actualErrorMsg, "Wrong email");
+		verifyEquals(actualErrorMsg, "Wrong email");
 	}
 	
 	@Test
@@ -50,7 +51,7 @@ public class Login_01 {
 		loginObject.inputEmail("ngo.le@gmail.com");
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
-		Assert.assertEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
+		verifyEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
 	}
 	
 	@Test
@@ -58,7 +59,7 @@ public class Login_01 {
 		loginObject.inputEmail("diep.test200@gmail.com");
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
-		Assert.assertEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
+		verifyEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
 	}
 	
 	@Test
@@ -67,14 +68,14 @@ public class Login_01 {
 		loginObject.inputPassword("123457");
 		loginObject.clickLoginButton();
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
-		Assert.assertEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
+		verifyEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
 	}
 	
 	@Test
 	public void TC_06_loginWithValidInformations() {
 		loginObject.inputPassword("123456");
 		loginObject.clickLoginButton();
-		Assert.assertTrue(loginObject.isMyAccountDisplayed());
+		verifyTrue(loginObject.isMyAccountDisplayed());
 	}
 	
 	@AfterClass

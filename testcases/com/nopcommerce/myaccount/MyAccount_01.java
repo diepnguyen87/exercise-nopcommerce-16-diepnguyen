@@ -68,25 +68,25 @@ public class MyAccount_01 extends AbstractTest{
 //		Assert.assertEquals(actualErrorMsg, updatedGender);
 //		
 		actualErrorMsg = accountObject.getValueOfField("first name");
-		Assert.assertEquals(actualErrorMsg, updatedFirstName);
+		verifyEquals(actualErrorMsg, updatedFirstName);
 		
 		actualErrorMsg = accountObject.getValueOfField("last name");
-		Assert.assertEquals(actualErrorMsg, updatedLastName);
+		verifyEquals(actualErrorMsg, updatedLastName);
 		
 		actualErrorMsg = accountObject.getValueOfField("birth day");
-		Assert.assertEquals(actualErrorMsg, updateDOB[1]);
+		verifyEquals(actualErrorMsg, updateDOB[1]);
 		
 		actualErrorMsg = accountObject.getValueOfField("birth month");
-		Assert.assertEquals(actualErrorMsg, updateDOB[0]);
+		verifyEquals(actualErrorMsg, updateDOB[0]);
 		
 		actualErrorMsg = accountObject.getValueOfField("birth year");
-		Assert.assertEquals(actualErrorMsg, updateDOB[2]);
+		verifyEquals(actualErrorMsg, updateDOB[2]);
 		
 		actualErrorMsg = accountObject.getValueOfField("email");
-		Assert.assertEquals(actualErrorMsg, updatedEmail);
+		verifyEquals(actualErrorMsg, updatedEmail);
 		
 		actualErrorMsg = accountObject.getValueOfField("company");
-		Assert.assertEquals(actualErrorMsg, updatedCompanyName);
+		verifyEquals(actualErrorMsg, updatedCompanyName);
 		
 	}
 

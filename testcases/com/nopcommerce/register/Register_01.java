@@ -39,11 +39,11 @@ public class Register_01 extends AbstractTest{
 		registerObject = startObject.clickRegisterLink();
 		registerObject.clickRegisterButton();
 
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.FIRSTNAME_ERROR_MESSAGE, "First name is required."));
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.LASTNAME_ERROR_MESSAGE, "Last name is required."));
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.EMAIL_ERROR_MESSAGE, "Email is required."));
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.PASSWORD_ERROR_MESSAGE, "Password is required."));
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.CONFIRMPASSWORD_ERROR_MESSAGE, "Password is required."));
+		verifyTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.FIRSTNAME_ERROR_MESSAGE, "First name is required."));
+		verifyTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.LASTNAME_ERROR_MESSAGE, "Last name is required."));
+		verifyTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.EMAIL_ERROR_MESSAGE, "Email is required."));
+		verifyTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.PASSWORD_ERROR_MESSAGE, "Password is required."));
+		verifyTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.CONFIRMPASSWORD_ERROR_MESSAGE, "Password is required."));
 	}
 
 	@Test
@@ -55,7 +55,7 @@ public class Register_01 extends AbstractTest{
 		registerObject.inputConfirmPassword("123456");
 		
 		registerObject.clickRegisterButton();
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.WRONG_EMAIL_MESSAGE, "Wrong email"));
+		verifyTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.WRONG_EMAIL_MESSAGE, "Wrong email"));
 	}
 	
 	@Test
@@ -65,7 +65,7 @@ public class Register_01 extends AbstractTest{
 		registerObject.inputConfirmPassword("123456");
 		
 		registerObject.clickRegisterButton();
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.SUMMARY_ERROR_MESSAGE, "The specified email already exists"));	
+		verifyTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.SUMMARY_ERROR_MESSAGE, "The specified email already exists"));	
 	}
 	
 	@Test
@@ -73,7 +73,7 @@ public class Register_01 extends AbstractTest{
 		registerObject.inputEmail("diep.nguyen" + getRandomNumber() + "@gmail.com");
 		registerObject.inputPasword("12345");
 		registerObject.pressControlTab();
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.PASSWORD_ERROR_MESSAGE, "Password must meet the following rules:\nmust have at least 6 characters"));	
+		verifyTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.PASSWORD_ERROR_MESSAGE, "Password must meet the following rules:\nmust have at least 6 characters"));	
 	}
 	
 	@Test
@@ -81,14 +81,14 @@ public class Register_01 extends AbstractTest{
 		registerObject.inputPasword("123456");
 		registerObject.inputConfirmPassword("1");
 		registerObject.pressControlTab();
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.CONFIRMPASSWORD_ERROR_MESSAGE, "The password and confirmation password do not match."));	
+		verifyTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.CONFIRMPASSWORD_ERROR_MESSAGE, "The password and confirmation password do not match."));	
 	}
 	
 	@Test
 	public void TC_06_registerWithValidInformations() {
 		registerObject.inputConfirmPassword("123456");
 		registerObject.clickRegisterButton();
-		Assert.assertTrue(registerObject.isErrorMessageDisplayed(HomePageUI.REGISTER_RESULT, "Your registration completed"));	
+		verifyTrue(registerObject.isErrorMessageDisplayed(HomePageUI.REGISTER_RESULT, "Your registration completed"));	
 		
 		homeObject = PageFactoryManager.getHomePageObject(driver);
 		homeObject.clickContinueButton();
