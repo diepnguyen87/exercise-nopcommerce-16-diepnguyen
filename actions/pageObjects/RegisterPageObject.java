@@ -61,7 +61,7 @@ public class RegisterPageObject extends AbstractPage {
 		sendKeyboardToElement(driver, RegisterPageUI.PASSWORD_TEXTBOX, Keys.TAB);
 	}
 
-	public String createRandomEmail(String firstName, String lastName) {
-		return firstName+"."+lastName+getRandomNumber()+"@gmail.com";
-	}
+//	public String createRandomEmail(String firstName, String lastName) {
+//		return firstName+"."+lastName+getRandomNumber()+"@gmail.com";
+//	}
 }

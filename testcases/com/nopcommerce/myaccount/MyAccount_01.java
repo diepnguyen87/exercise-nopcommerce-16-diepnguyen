@@ -1,6 +1,7 @@
 package com.nopcommerce.myaccount;
 
 import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
@@ -8,6 +9,7 @@ import org.testng.annotations.Test;
 
 import browsers.BrowserDriverFactory;
 import browsers.DriverManager;
+import commons.AbstractTest;
 import commons.GlobalConstants;
 import pageObjects.HomePageObject;
 import pageObjects.MyAccountPageObject;
@@ -15,7 +17,7 @@ import pageObjects.PageFactoryManager;
 import pageObjects.RegisterPageObject;
 import pageObjects.StartPageObject;
 
-public class MyAccount_01 {
+public class MyAccount_01 extends AbstractTest{
 
 	private WebDriver driver;
 	private DriverManager driverManager;
@@ -24,10 +26,14 @@ public class MyAccount_01 {
 	private HomePageObject homeObject;
 	private MyAccountPageObject accountObject;
 	private String email;
+	private String updatedGender = "female";
 	private String updatedFirstName="Automation";
 	private String updatedLastName="FC";
-	private String companyName = "Automation FC";
-
+	private String[] updateDOB = {"January", "1", "1999"};
+	private String updatedCompanyName = "Automation FC";
+	private String updatedEmail;
+	private String actualErrorMsg;
+	
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browserName) {
@@ -37,7 +43,7 @@ public class MyAccount_01 {
 		registerObject = startObject.clickRegisterLink();
 
 		// register + login success
-		email = registerObject.createRandomEmail(GlobalConstants.fistName, GlobalConstants.lastName);
+		email = createRandomEmail(GlobalConstants.fistName, GlobalConstants.lastName);
 		registerObject.inputFirstName(GlobalConstants.fistName);
 		registerObject.inputLastName(GlobalConstants.lastName);
 		registerObject.inputEmail(email);
@@ -48,12 +54,40 @@ public class MyAccount_01 {
 
 		// homepage
 		accountObject = homeObject.clickMyAccountLink();
-		accountObject.selectGender("female");
+		accountObject.selectGender(updatedGender);
 		accountObject.updateFirstName(updatedFirstName);
 		accountObject.updateLastName(updatedLastName);
-		accountObject.selectDateOfBirth("January", "1", "1999");
-		accountObject.updateEmail("automationfc.vn@gmail.com");
-		accountObject.updateCompanyName(companyName);
+		accountObject.selectDateOfBirth(updateDOB[0], updateDOB[1], updateDOB[2]);
+		updatedEmail = createRandomEmail("automationfc", "vn");
+		accountObject.updateEmail(updatedEmail);
+		accountObject.updateCompanyName(updatedCompanyName);
+		
+		
+		accountObject = accountObject.clickSaveButton();
+//		actualErrorMsg = accountObject.getValueOfField("female");
+//		Assert.assertEquals(actualErrorMsg, updatedGender);
+//		
+		actualErrorMsg = accountObject.getValueOfField("first name");
+		Assert.assertEquals(actualErrorMsg, updatedFirstName);
+		
+		actualErrorMsg = accountObject.getValueOfField("last name");
+		Assert.assertEquals(actualErrorMsg, updatedLastName);
+		
+		actualErrorMsg = accountObject.getValueOfField("birth day");
+		Assert.assertEquals(actualErrorMsg, updateDOB[1]);
+		
+		actualErrorMsg = accountObject.getValueOfField("birth month");
+		Assert.assertEquals(actualErrorMsg, updateDOB[0]);
+		
+		actualErrorMsg = accountObject.getValueOfField("birth year");
+		Assert.assertEquals(actualErrorMsg, updateDOB[2]);
+		
+		actualErrorMsg = accountObject.getValueOfField("email");
+		Assert.assertEquals(actualErrorMsg, updatedEmail);
+		
+		actualErrorMsg = accountObject.getValueOfField("company");
+		Assert.assertEquals(actualErrorMsg, updatedCompanyName);
+		
 	}
 
 	@Test

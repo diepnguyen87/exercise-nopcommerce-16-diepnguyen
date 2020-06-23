@@ -55,4 +55,53 @@ public class MyAccountPageObject extends AbstractPage {
 		waitForElementVisible(driver, MyAccountPageUI.COMPANY_TEXTBOX);
 		sendKeyToElement(driver, MyAccountPageUI.COMPANY_TEXTBOX, companyName);	
 	}
+
+	public MyAccountPageObject clickSaveButton() {
+		waitForElementVisible(driver, MyAccountPageUI.SAVE_BUTTON);
+		clickToElement(driver, MyAccountPageUI.SAVE_BUTTON);
+		return PageFactoryManager.getMyAccountPageObject(driver);
+	}
+
+	public String getValueOfField(String fieldName) {
+		String value="";
+		switch (fieldName) {
+		case "gender":
+			waitForElementVisible(driver, MyAccountPageUI.GENDER_RADIO_BUTTON, "female");
+			System.out.println(isElementSelected(driver, MyAccountPageUI.GENDER_RADIO_BUTTON, "female"));
+			if(isElementSelected(driver, MyAccountPageUI.GENDER_RADIO_BUTTON, "female")) {
+				value = "female";
+			}
+			break;
+		case "first name":
+			waitForElementVisible(driver, MyAccountPageUI.FIRST_NAME_TEXTBOX);
+			value = getElementText(driver, MyAccountPageUI.FIRST_NAME_TEXTBOX);
+			break;
+		case "last name":
+			waitForElementVisible(driver, MyAccountPageUI.LAST_NAME_TEXTBOX);
+			value = getElementText(driver, MyAccountPageUI.LAST_NAME_TEXTBOX);
+			break;
+		case "birth day":
+			waitForElementVisible(driver, MyAccountPageUI.DOB_SELECT, "Day");
+			value = getSelectedItemInDropdown(driver, MyAccountPageUI.DOB_SELECT, "Day").getText();
+			break;
+		case "birth month":
+			waitForElementVisible(driver, MyAccountPageUI.DOB_SELECT, "Month");
+			value = getSelectedItemInDropdown(driver, MyAccountPageUI.DOB_SELECT, "Month").getText();
+			break;
+		case "birth year":
+			waitForElementVisible(driver, MyAccountPageUI.DOB_SELECT, "Year");
+			value = getSelectedItemInDropdown(driver, MyAccountPageUI.DOB_SELECT, "Year").getText();
+			break;
+		case "email":
+			waitForElementVisible(driver, MyAccountPageUI.EMAIL_TEXTBOX);
+			value = getSelectedItemInDropdown(driver, MyAccountPageUI.EMAIL_TEXTBOX).getText();
+			break;
+		case "company":
+			waitForElementVisible(driver, MyAccountPageUI.COMPANY_TEXTBOX);
+			value = getElementText(driver, MyAccountPageUI.COMPANY_TEXTBOX);
+			break;
+		}
+		return value;
+	}
+
 }

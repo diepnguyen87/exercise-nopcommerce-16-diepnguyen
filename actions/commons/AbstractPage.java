@@ -160,6 +160,10 @@ public abstract class AbstractPage {
 	public WebElement getSelectedItemInDropdown(WebDriver driver, String xpathLocator) {
 		return new Select(findElement(driver, xpathLocator)).getFirstSelectedOption();
 	}
+	
+	public WebElement getSelectedItemInDropdown(WebDriver driver, String xpathLocator, String... xpathValues) {
+		return new Select(findElement(driver, castToObject(xpathLocator, xpathValues))).getFirstSelectedOption();
+	}
 
 	public boolean isDropdownMultiple(WebDriver driver, String xpathLocator) {
 		return new Select(findElement(driver, xpathLocator)).isMultiple();
@@ -376,11 +380,6 @@ public abstract class AbstractPage {
 		}
 	}
 	
-	public int getRandomNumber() {
-		Random random = new Random();
-		return random.nextInt(1000);
-	}
-
 	private WebDriverWait explicitWait;
 	private WebElement element;
 	private JavascriptExecutor jsExecutor;

@@ -11,5 +11,9 @@ public class PageFactoryManager {
 	public static StartPageObject getStartPageObject(WebDriver driver) {
 		return new StartPageObject(driver);
 	}
+
+	public static MyAccountPageObject getMyAccountPageObject(WebDriver driver) {
+		return new MyAccountPageObject(driver);
+	}
 		
 }

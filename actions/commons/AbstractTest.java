@@ -1,5 +1,6 @@
 package commons;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -15,7 +16,7 @@ public abstract class AbstractTest {
 
 	private WebDriver driver;
 
-	public WebDriver getBrowserDriver(String browserName) {
+	protected WebDriver getBrowserDriver(String browserName) {
 		if (browserName.equalsIgnoreCase("firefox")) {
 			WebDriverManager.firefoxdriver().setup();
 			driver = new FirefoxDriver();
@@ -42,5 +43,15 @@ public abstract class AbstractTest {
 		driver.get(GlobalConstants.NOPCOMMERCE_URL);
 		return driver;
 	}
+	
+	protected int getRandomNumber() {
+		Random random = new Random();
+		return random.nextInt(1000);
+	}
+	
+	public String createRandomEmail(String firstName, String lastName) {
+		return firstName+"."+lastName+getRandomNumber()+"@gmail.com";
+	}
+
 
 }

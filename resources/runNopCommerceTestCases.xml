@@ -1,43 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <suite name="Nop Commerce" parallel="false">
-  
-    <test name="Run on FIREFOX">
+
+	<listeners>
+		<listener class-name="commons.MethodListener" />
+	</listeners>
+	
+	<test name="Run on FIREFOX">
 		<classes>
 			<parameter name="browser" value="firefox" />
-<!-- 			  <class name="com.nopcommerce.register.Register_01"/> -->
-<!-- 			  <class name="com.nopcommerce.login.Login_01"/> -->
-			  <class name="com.nopcommerce.myaccount.MyAccount_01"/>
-			  
+			<!-- <class name="com.nopcommerce.register.Register_01"/> -->
+			<!-- <class name="com.nopcommerce.login.Login_01"/> -->
+			<class name="com.nopcommerce.myaccount.MyAccount_01" />
+
 		</classes>
 	</test>
 
-<!-- 	<test name="Run on CHROME"> -->
-<!-- 		<classes> -->
-<!-- 			<parameter name="browser" value="chrome" /> -->
-<!-- 			<class name="com.nopcommerce.register.Register_01" /> -->
-<!-- 		</classes> -->
-<!-- 	</test> -->
+	<!-- <test name="Run on CHROME"> -->
+	<!-- <classes> -->
+	<!-- <parameter name="browser" value="chrome" /> -->
+	<!-- <class name="com.nopcommerce.register.Register_01" /> -->
+	<!-- </classes> -->
+	<!-- </test> -->
 
-<!-- 	<test name="Run on CHROME-HEADLESS"> -->
-<!-- 		<classes> -->
-<!-- 			<parameter name="browser" value="chrome-headless" /> -->
-<!-- 			<class name="com.jquery.datatable.JQuery_01_DataTable" /> -->
-<!-- 		</classes> -->
-<!-- 	</test> -->
+	<!-- <test name="Run on CHROME-HEADLESS"> -->
+	<!-- <classes> -->
+	<!-- <parameter name="browser" value="chrome-headless" /> -->
+	<!-- <class name="com.jquery.datatable.JQuery_01_DataTable" /> -->
+	<!-- </classes> -->
+	<!-- </test> -->
 
-<!-- 	<test name="Run on EDGE"> -->
-<!-- 		<classes> -->
-<!-- 			<parameter name="browser" value="edge" /> -->
-<!-- 			<class name="com.jquery.datatable.JQuery_01_DataTable" /> -->
-<!-- 		</classes> -->
-<!-- 	</test> -->
+	<!-- <test name="Run on EDGE"> -->
+	<!-- <classes> -->
+	<!-- <parameter name="browser" value="edge" /> -->
+	<!-- <class name="com.jquery.datatable.JQuery_01_DataTable" /> -->
+	<!-- </classes> -->
+	<!-- </test> -->
 
 
-<!-- 	<test name="Run on IE"> -->
-<!-- 		<classes> -->
-<!-- 			<parameter name="browser" value="ie" /> -->
-<!-- 			<class name="com.jquery.datatable.JQuery_01_DataTable" /> -->
-<!-- 		</classes> -->
-<!-- 	</test> -->
-   
+	<!-- <test name="Run on IE"> -->
+	<!-- <classes> -->
+	<!-- <parameter name="browser" value="ie" /> -->
+	<!-- <class name="com.jquery.datatable.JQuery_01_DataTable" /> -->
+	<!-- </classes> -->
+	<!-- </test> -->
+
 </suite> <!-- Suite -->

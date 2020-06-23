@@ -8,4 +8,8 @@ public class MyAccountPageUI {
 	public static final String DOB_SELECT = "//select[@name='DateOfBirth%s']";
 	public static final String EMAIL_TEXTBOX = "//input[@id='Email']";
 	public static final String COMPANY_TEXTBOX = "//input[@id='Company']";
+	public static final String SAVE_BUTTON = "//input[@id='save-info-button']";
+	
+	
+	
 }

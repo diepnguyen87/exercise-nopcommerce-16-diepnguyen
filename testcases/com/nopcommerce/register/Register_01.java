@@ -1,5 +1,10 @@
 package com.nopcommerce.register;
 
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import browsers.BrowserDriverFactory;
@@ -13,13 +18,7 @@ import pageObjects.StartPageObject;
 import pageUI.HomePageUI;
 import pageUI.RegisterPageUI;
 
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
-import org.openqa.selenium.WebDriver;
-import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-
-public class Register_01{
+public class Register_01 extends AbstractTest{
 
 	private WebDriver driver;
 	private DriverManager driverManager;
@@ -71,7 +70,7 @@ public class Register_01{
 	
 	@Test
 	public void TC_04_registerWithPasswordLessThan6Chars() {
-		registerObject.inputEmail("diep.nguyen" + registerObject.getRandomNumber() + "@gmail.com");
+		registerObject.inputEmail("diep.nguyen" + getRandomNumber() + "@gmail.com");
 		registerObject.inputPasword("12345");
 		registerObject.pressControlTab();
 		Assert.assertTrue(registerObject.isErrorMessageDisplayed(RegisterPageUI.PASSWORD_ERROR_MESSAGE, "Password must meet the following rules:\nmust have at least 6 characters"));	
