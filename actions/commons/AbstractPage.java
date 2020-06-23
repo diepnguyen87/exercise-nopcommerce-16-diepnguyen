@@ -1,7 +1,6 @@
 package commons;
 
 import java.util.List;
-import java.util.Random;
 import java.util.Set;
 
 import org.openqa.selenium.By;
@@ -184,8 +183,8 @@ public abstract class AbstractPage {
 		}
 	}
 
-	public void getAttributeValue(WebDriver driver, String xpathLocator, String attributeName) {
-		findElement(driver, xpathLocator).getAttribute(attributeName);
+	public String getAttributeValue(WebDriver driver, String xpathLocator, String attributeName) {
+		return findElement(driver, xpathLocator).getAttribute(attributeName);
 	}
 
 	public String getElementText(WebDriver driver, String xpathLocator) {

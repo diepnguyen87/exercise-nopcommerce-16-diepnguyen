@@ -15,13 +15,12 @@ public class MyAccountPageObject extends AbstractPage {
 		this.driver = driver;
 	}
 
-	public void selectGender(String gender) {
+	public void updateGender(String gender) {
 		String genderXpath = castToObject(MyAccountPageUI.GENDER_RADIO_BUTTON, gender);
 		waitForElementVisible(driver, genderXpath);
 		if(!isElementSelected(driver, genderXpath)) {
 			clickToElement(driver, genderXpath);
 		}
-		
 	}
 
 	public void updateFirstName(String firstName) {
@@ -34,7 +33,7 @@ public class MyAccountPageObject extends AbstractPage {
 		sendKeyToElement(driver, MyAccountPageUI.LAST_NAME_TEXTBOX, lastName);	
 	}
 
-	public void selectDateOfBirth(String month, String day, String year) {
+	public void updateDateOfBirth(String month, String day, String year) {
 		select = new Select(findElement(driver, MyAccountPageUI.DOB_SELECT, "Day"));
 		select.selectByVisibleText(day);
 		
@@ -65,20 +64,20 @@ public class MyAccountPageObject extends AbstractPage {
 	public String getValueOfField(String fieldName) {
 		String value="";
 		switch (fieldName) {
-		case "gender":
+		case "female":
 			waitForElementVisible(driver, MyAccountPageUI.GENDER_RADIO_BUTTON, "female");
-			System.out.println(isElementSelected(driver, MyAccountPageUI.GENDER_RADIO_BUTTON, "female"));
+//			System.out.println(isElementSelected(driver, MyAccountPageUI.GENDER_RADIO_BUTTON, "female"));
 			if(isElementSelected(driver, MyAccountPageUI.GENDER_RADIO_BUTTON, "female")) {
 				value = "female";
 			}
 			break;
 		case "first name":
 			waitForElementVisible(driver, MyAccountPageUI.FIRST_NAME_TEXTBOX);
-			value = getElementText(driver, MyAccountPageUI.FIRST_NAME_TEXTBOX);
+			value = getAttributeValue(driver, MyAccountPageUI.FIRST_NAME_TEXTBOX, "value");
 			break;
 		case "last name":
 			waitForElementVisible(driver, MyAccountPageUI.LAST_NAME_TEXTBOX);
-			value = getElementText(driver, MyAccountPageUI.LAST_NAME_TEXTBOX);
+			value = getAttributeValue(driver, MyAccountPageUI.LAST_NAME_TEXTBOX, "value");
 			break;
 		case "birth day":
 			waitForElementVisible(driver, MyAccountPageUI.DOB_SELECT, "Day");
@@ -94,11 +93,11 @@ public class MyAccountPageObject extends AbstractPage {
 			break;
 		case "email":
 			waitForElementVisible(driver, MyAccountPageUI.EMAIL_TEXTBOX);
-			value = getSelectedItemInDropdown(driver, MyAccountPageUI.EMAIL_TEXTBOX).getText();
+			value = getAttributeValue(driver, MyAccountPageUI.EMAIL_TEXTBOX, "value");
 			break;
 		case "company":
 			waitForElementVisible(driver, MyAccountPageUI.COMPANY_TEXTBOX);
-			value = getElementText(driver, MyAccountPageUI.COMPANY_TEXTBOX);
+			value = getAttributeValue(driver, MyAccountPageUI.COMPANY_TEXTBOX, "value");
 			break;
 		}
 		return value;
