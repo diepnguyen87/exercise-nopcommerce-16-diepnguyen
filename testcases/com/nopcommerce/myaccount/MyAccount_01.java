@@ -1,5 +1,9 @@
 package com.nopcommerce.myaccount;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -16,7 +20,10 @@ import pageObjects.CustomerChangePasswordPageObject;
 import pageObjects.CustomerInfosPageObject;
 import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
+import pageObjects.MyProductReviewPageObject;
 import pageObjects.PageFactoryManager;
+import pageObjects.ProductOverviewPageObject;
+import pageObjects.ProductReviewPageObject;
 import pageObjects.RegisterPageObject;
 import pageObjects.StartPageObject;
 
@@ -31,7 +38,9 @@ public class MyAccount_01 extends AbstractTest {
 	private CustomerInfosPageObject customerInfoObject;
 	private CustomerAddressesPageObject customerAddressObject;
 	private CustomerChangePasswordPageObject changePasswordObject;
-
+	private ProductOverviewPageObject productOverviewObject;
+	private ProductReviewPageObject productReviewObject;
+	private MyProductReviewPageObject myProductReviewObject;
 	private String email;
 	private String newEmail;
 	private String password = GlobalConstants.PASSWORD;
@@ -199,7 +208,54 @@ public class MyAccount_01 extends AbstractTest {
 		loginObject = PageFactoryManager.getLoginPageObject(driver);
 		loginObject.login(newEmail, newPassword);
 		verifyTrue(loginObject.isMyAccountDisplayed());
+		homeObject = PageFactoryManager.getHomePageObject(driver);
+	}
 
+	@Test
+	public void TC_04_myProductReviews() {
+		// data
+		String url = "https://demo.nopcommerce.com/adidas-consortium-campus-80s-running-shoes";
+		String reviewTitle = "Đáng đồng tiền";
+		String reviewText = "Độ bám tốt, phù hợp cho các hoạt động thể thao, trekking... Các bạn nên mua thử";
+		String productName = "";
+
+		// open random product and add review 1
+		homeObject.openURL(driver, url);
+		productOverviewObject = PageFactoryManager.getProductOverviewPageObject(driver);
+		productName = productOverviewObject.getProductName();
+		productReviewObject = productOverviewObject.addReview(reviewTitle, reviewText, "3");
+
+		// open the product again and add review 2
+		productReviewObject.openURL(driver, url);
+		productOverviewObject = PageFactoryManager.getProductOverviewPageObject(driver);
+		productName = productOverviewObject.getProductName();
+		productReviewObject = productOverviewObject.addReview(reviewTitle, reviewText, "1");
+
+		// navigate to my product reviews
+		productReviewObject.navigateToPage_HeaderLink(driver, "account");
+		customerInfoObject = PageFactoryManager.getCustomerInfosPageObject(driver);
+		customerInfoObject.navigateToPage_ContentList(driver, "/customer/productreviews");
+		myProductReviewObject = PageFactoryManager.getMyProductReviewPageObject(driver);
+
+		// Verify
+		actualValue = myProductReviewObject.getMyLastestReviewTitle();
+		verifyEquals(actualValue, reviewTitle);
+
+		actualValue = myProductReviewObject.getMyLastestReviewText();
+		verifyEquals(actualValue, reviewText);
+
+		actualValue = myProductReviewObject.getMyLastestReviewProductName();
+		verifyEquals(actualValue, productName);
+
+		String[] latestReviewDateTime = myProductReviewObject.getMyLastestReviewDateTime();
+
+		SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy h:mm a");
+		sdf.setTimeZone(TimeZone.getTimeZone("US/Central"));
+		String[] currentDateTime = sdf.format(new Date()).split("\\s");
+
+		verifyEquals(latestReviewDateTime[0], currentDateTime[0]);
+		verifyTrue(myProductReviewObject.isCurrentTimeGreaterThanLastestReviewTime(latestReviewDateTime[1], currentDateTime[1]));
+		verifyEquals(latestReviewDateTime[2], currentDateTime[2]);
 	}
 
 	@AfterClass

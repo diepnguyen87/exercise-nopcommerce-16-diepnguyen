@@ -36,5 +36,18 @@ public class PageFactoryManager {
 		return new CustomerChangePasswordPageObject(driver);
 	}
 	
-
+	public static ProductOverviewPageObject getProductOverviewPageObject(WebDriver driver) {
+		return new ProductOverviewPageObject(driver);
+	}
+	
+	public static ProductReviewPageObject getProductReviewPageObject(WebDriver driver) {
+		return new ProductReviewPageObject(driver);
+	}
+	
+	public static MyProductReviewPageObject getMyProductReviewPageObject(WebDriver driver) {
+		return new MyProductReviewPageObject(driver);
+	}
+	
+	
+	
 }
