@@ -10,7 +10,8 @@
 			<parameter name="browser" value="firefox" />
 <!-- 			<class name="com.nopcommerce.register.Register_01"/> -->
 <!-- 			<class name="com.nopcommerce.login.Login_01"/> -->
-			<class name="com.nopcommerce.myaccount.MyAccount_01" />
+<!-- 			<class name="com.nopcommerce.myaccount.MyAccount_01" /> -->
+			<class name="com.nopcommerce.search.Search_01" />
 
 		</classes>
 	</test>

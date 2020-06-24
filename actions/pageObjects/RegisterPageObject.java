@@ -4,13 +4,12 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPage;
-import commons.GlobalConstants;
 import pageUI.RegisterPageUI;
 
 public class RegisterPageObject extends AbstractPage {
 
 	private WebDriver driver;
-	
+
 	public RegisterPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
@@ -25,9 +24,8 @@ public class RegisterPageObject extends AbstractPage {
 		String actualErrorMsg = getElementText(driver, xpathLocator);
 		System.out.println("Actual: " + actualErrorMsg);
 		System.out.println("Expected: " + expectedErrorMsg);
-		
-		
-		if(!actualErrorMsg.equals(expectedErrorMsg)) {
+
+		if (!actualErrorMsg.equals(expectedErrorMsg)) {
 			return false;
 		}
 		return true;
@@ -45,7 +43,7 @@ public class RegisterPageObject extends AbstractPage {
 
 	public void inputEmail(String email) {
 		waitForElementVisible(driver, RegisterPageUI.EMAIL_TEXTBOX);
-		sendKeyToElement(driver, RegisterPageUI.EMAIL_TEXTBOX, email);	
+		sendKeyToElement(driver, RegisterPageUI.EMAIL_TEXTBOX, email);
 	}
 
 	public void inputPasword(String password) {

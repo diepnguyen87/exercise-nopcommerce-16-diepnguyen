@@ -48,6 +48,9 @@ public class PageFactoryManager {
 		return new MyProductReviewPageObject(driver);
 	}
 	
+	public static SearchPageObject getSearchPageObject(WebDriver driver) {
+		return new SearchPageObject(driver);
+	}
 	
 	
 }

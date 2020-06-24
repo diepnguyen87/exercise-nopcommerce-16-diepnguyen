@@ -44,6 +44,11 @@ public abstract class AbstractPage {
 		clickToElement(driver, AbstractPageUI.HEADER_LINK, pageName);
 	}
 	
+	public void navigateToPage_FooterLink(WebDriver driver, String pageName) {
+		waitForElementClickable(driver, AbstractPageUI.FOOTER_LINK, pageName);
+		clickToElement(driver, AbstractPageUI.FOOTER_LINK, pageName);
+	}
+	
 	public void navigateToPage_ContentList(WebDriver driver, String pageName) {
 		waitForElementClickable(driver, MyAccountPageUI.CONTENT_LIST, pageName);
 		clickToElement(driver, MyAccountPageUI.CONTENT_LIST, pageName);
