@@ -51,6 +51,10 @@ public class PageFactoryManager {
 	public static SearchPageObject getSearchPageObject(WebDriver driver) {
 		return new SearchPageObject(driver);
 	}
-	
+
+	public static SubCategoriesPageObject getSubCategoriesPageObject(WebDriver driver) {
+		return new SubCategoriesPageObject(driver);
+	}
+
 	
 }

@@ -40,8 +40,8 @@ public class LoginPageObject extends AbstractPage {
 	}
 
 	public boolean isMyAccountDisplayed() {
-		waitForElementVisible(driver, AbstractPageUI.HEADER_LINK, "account");
-		return isElementDisplayed(driver, AbstractPageUI.HEADER_LINK, "account");
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_HEADER_LINK, "account");
+		return isElementDisplayed(driver, AbstractPageUI.DYNAMIC_HEADER_LINK, "account");
 	}
 	
 	public HomePageObject login(String email, String password) {

@@ -13,6 +13,9 @@ public class StartPageObject extends AbstractPage {
 		this.driver = driver;
 	}
 
+
+	
+
 //	public RegisterPageObject clickRegisterLink() {
 //		waitForElementVisible(driver, StartPageUI.REGISTER_LINK);
 //		clickToElement(driver, StartPageUI.REGISTER_LINK);

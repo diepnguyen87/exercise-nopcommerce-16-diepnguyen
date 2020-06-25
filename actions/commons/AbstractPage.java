@@ -1,5 +1,7 @@
 package commons;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -18,6 +20,7 @@ import pageObjects.PageFactoryManager;
 import pageObjects.StartPageObject;
 import pageUI.AbstractPageUI;
 import pageUI.MyAccountPageUI;
+import pageUI.SubCategoriesPageUI;
 
 public abstract class AbstractPage {
 
@@ -34,27 +37,38 @@ public abstract class AbstractPage {
 //		}
 //	}
 
+	
+	public void selectSubMenu(WebDriver driver, String subMenuXpathParam, String menuXpathParam) {
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_HEADER_MENU, menuXpathParam);
+		hoverMouseToElement(driver, AbstractPageUI.DYNAMIC_HEADER_MENU, menuXpathParam);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_HEADER_SUB_MENU, menuXpathParam, subMenuXpathParam);
+	}
+
 	public StartPageObject logout(WebDriver driver) {
 		navigateToPage_HeaderLink(driver, "logout");
 		return PageFactoryManager.getStartPageObject(driver);
 	}
-	
+
 	public void navigateToPage_HeaderLink(WebDriver driver, String pageName) {
-		waitForElementClickable(driver, AbstractPageUI.HEADER_LINK, pageName);
-		clickToElement(driver, AbstractPageUI.HEADER_LINK, pageName);
+		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_HEADER_LINK, pageName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_HEADER_LINK, pageName);
 	}
-	
+
+	public void navigateToPage_HeaderMenu(WebDriver driver, String pageName) {
+		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_HEADER_MENU, pageName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_HEADER_MENU, pageName);
+	}
+
 	public void navigateToPage_FooterLink(WebDriver driver, String pageName) {
-		waitForElementClickable(driver, AbstractPageUI.FOOTER_LINK, pageName);
-		clickToElement(driver, AbstractPageUI.FOOTER_LINK, pageName);
+		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_FOOTER_LINK, pageName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_FOOTER_LINK, pageName);
 	}
-	
+
 	public void navigateToPage_ContentList(WebDriver driver, String pageName) {
 		waitForElementClickable(driver, MyAccountPageUI.CONTENT_LIST, pageName);
 		clickToElement(driver, MyAccountPageUI.CONTENT_LIST, pageName);
 	}
-	
-	
+
 	public boolean isPageLoaded(WebDriver driver, String pageURL) {
 		String actualURL = getCurrentURL(driver);
 		return actualURL.endsWith(pageURL);
@@ -276,6 +290,11 @@ public abstract class AbstractPage {
 	public void hoverMouseToElement(WebDriver driver, String xpathLocator) {
 		action = new Actions(driver);
 		action.moveToElement(findElement(driver, xpathLocator)).perform();
+	}
+
+	public void hoverMouseToElement(WebDriver driver, String xpathLocator, String... xpathParams) {
+		action = new Actions(driver);
+		action.moveToElement(findElement(driver, castToObject(xpathLocator, xpathParams))).perform();
 	}
 
 	public void rightClick(WebDriver driver, String xpathLocator) {
