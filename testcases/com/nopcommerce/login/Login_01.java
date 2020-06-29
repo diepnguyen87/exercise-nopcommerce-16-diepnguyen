@@ -25,8 +25,13 @@ public class Login_01 extends AbstractTest {
 	@Parameters("browser")
 	@BeforeClass
 	public void beforeClass(String browserName) {
+		log.info("Pre-condition - STEP 01: get browser driver");
 		driverManager = BrowserDriverFactory.getBrowserDriver(browserName);
+		
+		log.info("Pre-condition - STEP 02: open browser with specific config");
 		driver = driverManager.getDriver();
+		
+		log.info("Pre-condition - STEP 03: open start page");
 		startObject = PageFactoryManager.getStartPageObject(driver);
 	}
 	
@@ -34,53 +39,55 @@ public class Login_01 extends AbstractTest {
 	public void TC_01_loginWithEmptyData() {
 		startObject.navigateToPage_HeaderLink(driver, "login");
 		loginObject = PageFactoryManager.getLoginPageObject(driver);
-		loginObject.clickLoginButton();
+		loginObject.clickToDynamicButton(driver, "Log in");
 		actualErrorMsg = loginObject.getEmailErrorMsg();
 		verifyEquals(actualErrorMsg, "Please enter your email");
 	}
 
 	@Test
 	public void TC_02_loginWithInvalidEmail() {
-		loginObject.inputEmail("123@123.123");
-		loginObject.clickLoginButton();
+		loginObject.inputToDynamicTextbox(driver, "Email", "123@123.123");
+		loginObject.clickToDynamicButton(driver, "Log in");
 		actualErrorMsg = loginObject.getEmailErrorMsg();
 		verifyEquals(actualErrorMsg, "Wrong email");
 	}
 	
 	@Test
 	public void TC_03_loginWithEmailNotExisted() {
-		loginObject.inputEmail("ngo.le@gmail.com");
-		loginObject.clickLoginButton();
+		loginObject.inputToDynamicTextbox(driver, "Email", "ngo.le@gmail.com");
+		loginObject.clickToDynamicButton(driver, "Log in");
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
 		verifyEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nNo customer account found");
 	}
 	
 	@Test
 	public void TC_04_loginWithEmptyPassword() {
-		loginObject.inputEmail(GlobalConstants.EMAIL);
-		loginObject.clickLoginButton();
+		loginObject.inputToDynamicTextbox(driver, "Email", GlobalConstants.EMAIL);
+		loginObject.clickToDynamicButton(driver, "Log in");
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
 		verifyEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
 	}
 	
 	@Test
 	public void TC_05_loginWithIncorrectPassword() {
-		loginObject.inputEmail(GlobalConstants.EMAIL);
-		loginObject.inputPassword("123457");
-		loginObject.clickLoginButton();
+		loginObject.inputToDynamicTextbox(driver, "Email", GlobalConstants.EMAIL);
+		loginObject.inputToDynamicTextbox(driver, "Password", "123457");
+		loginObject.clickToDynamicButton(driver, "Log in");
 		actualErrorMsg = loginObject.getSummaryErrorMsg();
 		verifyEquals(actualErrorMsg, "Login was unsuccessful. Please correct the errors and try again.\nThe credentials provided are incorrect");
 	}
 	
 	@Test
 	public void TC_06_loginWithValidInformations() {
-		loginObject.inputPassword(GlobalConstants.PASSWORD);
-		loginObject.clickLoginButton();
+		loginObject.inputToDynamicTextbox(driver, "Password", GlobalConstants.PASSWORD);
+		loginObject.clickToDynamicButton(driver, "Log in");
 		verifyTrue(loginObject.isMyAccountDisplayed());
 	}
 	
-	@AfterClass
+	@AfterClass(alwaysRun = true)
 	public void afterClass() {
+		log.info("Post-condition - close browser");
+		closeBrowserAndDriver(driver);
 	}
 
 }

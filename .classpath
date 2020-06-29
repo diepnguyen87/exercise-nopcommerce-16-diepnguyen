@@ -24,6 +24,10 @@
 	<classpathentry kind="lib" path="libraries/log4j/commons-io-2.6.jar"/>
 	<classpathentry kind="lib" path="libraries/log4j/commons-lang3-3.8.1.jar"/>
 	<classpathentry kind="lib" path="libraries/log4j/commons-logging-1.2.jar"/>
-	<classpathentry kind="lib" path="libraries/log4j/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="libraries/log4j/log4j-1.2.16.jar" sourcepath="C:/Users/Admin/AppData/Local/Temp/.org.sf.feeling.decompiler1593396519696/source/log4j-1.2.16-sources.jar"/>
+	<classpathentry kind="lib" path="libraries/reportNG/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="libraries/reportNG/guice-3.0.jar"/>
+	<classpathentry kind="lib" path="libraries/reportNG/reportng-1.1.4.jar"/>
+	<classpathentry kind="lib" path="libraries/reportNG/velocity-1.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

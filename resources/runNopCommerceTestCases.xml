@@ -3,17 +3,20 @@
 
 	<listeners>
 		<listener class-name="commons.MethodListener" />
+		<listener class-name="org.uncommons.reportng.HTMLReporter" />
+		<listener class-name="org.uncommons.reportng.JUnitXMLReporter" />
 	</listeners>
-	
+
 	<test name="Run on FIREFOX">
 		<classes>
 			<parameter name="browser" value="firefox" />
-<!-- 			<class name="com.nopcommerce.register.Register_01"/> -->
+			<class name="com.nopcommerce.commons.Commons_Register" />
+			<!-- <class name="com.nopcommerce.register.Register_01"/> -->
 <!-- 			<class name="com.nopcommerce.login.Login_01"/> -->
-<!-- 			<class name="com.nopcommerce.myaccount.MyAccount_01" /> -->
-<!-- 			<class name="com.nopcommerce.search.Search_01" /> -->
-			<class name="com.nopcommerce.sort.Sort_01" />
-
+			<class name="com.nopcommerce.myaccount.MyAccount_01" />
+			<!-- <class name="com.nopcommerce.search.Search_01" /> -->
+			<!-- <class name="com.nopcommerce.sort.Sort_01" /> -->
+<!-- 			<class name="com.nopcommerce.wishlist.Wishlist_01" /> -->
 		</classes>
 	</test>
 

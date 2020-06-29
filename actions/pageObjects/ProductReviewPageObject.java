@@ -3,7 +3,7 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPage;
-import pageUI.ProductOverviewPageUI;
+import pageUI.ProductPageUI;
 import pageUI.ProductReviewPageUI;
 
 public class ProductReviewPageObject extends AbstractPage{

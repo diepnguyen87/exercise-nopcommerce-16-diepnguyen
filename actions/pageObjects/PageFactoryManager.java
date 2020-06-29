@@ -36,8 +36,8 @@ public class PageFactoryManager {
 		return new CustomerChangePasswordPageObject(driver);
 	}
 	
-	public static ProductOverviewPageObject getProductOverviewPageObject(WebDriver driver) {
-		return new ProductOverviewPageObject(driver);
+	public static ProductPageObject getProductPageObject(WebDriver driver) {
+		return new ProductPageObject(driver);
 	}
 	
 	public static ProductReviewPageObject getProductReviewPageObject(WebDriver driver) {
@@ -54,6 +54,10 @@ public class PageFactoryManager {
 
 	public static SubCategoriesPageObject getSubCategoriesPageObject(WebDriver driver) {
 		return new SubCategoriesPageObject(driver);
+	}
+
+	public static WishListPageObject getWishListPageObject(WebDriver driver) {
+		return new WishListPageObject(driver);
 	}
 
 	

@@ -14,29 +14,14 @@ public class LoginPageObject extends AbstractPage {
 		this.driver = driver;
 	}
 
-	public void clickLoginButton() {
-		waitForElementVisible(driver, LoginPageUI.LOGIN_BUTTON);
-		clickToElement(driver, LoginPageUI.LOGIN_BUTTON);
-	}
-
 	public String getEmailErrorMsg() {
 		waitForElementVisible(driver, LoginPageUI.EMAIL_ERROR_MESSAGE);
 		return getElementText(driver, LoginPageUI.EMAIL_ERROR_MESSAGE);
 	}
 
-	public void inputEmail(String email) {
-		waitForElementVisible(driver, LoginPageUI.EMAIL_TEXTBOX);
-		sendKeyToElement(driver, LoginPageUI.EMAIL_TEXTBOX, email);
-	}
-
 	public String getSummaryErrorMsg() {
 		waitForElementVisible(driver, LoginPageUI.SUMMARY_ERROR_MESSAGE);
 		return getElementText(driver, LoginPageUI.SUMMARY_ERROR_MESSAGE);
-	}
-
-	public void inputPassword(String password) {
-		waitForElementVisible(driver, LoginPageUI.PASSWORD_TEXTBOX);
-		sendKeyToElement(driver, LoginPageUI.PASSWORD_TEXTBOX, password);
 	}
 
 	public boolean isMyAccountDisplayed() {
@@ -45,9 +30,9 @@ public class LoginPageObject extends AbstractPage {
 	}
 	
 	public HomePageObject login(String email, String password) {
-		inputEmail(email);
-		inputPassword(password);
-		clickLoginButton();
+		inputToDynamicTextbox(driver, "Email", email);
+		inputToDynamicTextbox(driver, "Password", password);
+		clickToDynamicButton(driver, "Log in");
 		return PageFactoryManager.getHomePageObject(driver);
 	}
 

@@ -22,8 +22,8 @@ public class RegisterPageObject extends AbstractPage {
 	public boolean isErrorMessageDisplayed(String xpathLocator, String expectedErrorMsg) {
 		waitForElementVisible(driver, xpathLocator);
 		String actualErrorMsg = getElementText(driver, xpathLocator);
-		System.out.println("Actual: " + actualErrorMsg);
-		System.out.println("Expected: " + expectedErrorMsg);
+//		System.out.println("Actual: " + actualErrorMsg);
+//		System.out.println("Expected: " + expectedErrorMsg);
 
 		if (!actualErrorMsg.equals(expectedErrorMsg)) {
 			return false;

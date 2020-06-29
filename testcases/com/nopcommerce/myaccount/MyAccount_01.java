@@ -22,7 +22,7 @@ import pageObjects.HomePageObject;
 import pageObjects.LoginPageObject;
 import pageObjects.MyProductReviewPageObject;
 import pageObjects.PageFactoryManager;
-import pageObjects.ProductOverviewPageObject;
+import pageObjects.ProductPageObject;
 import pageObjects.ProductReviewPageObject;
 import pageObjects.RegisterPageObject;
 import pageObjects.StartPageObject;
@@ -38,14 +38,15 @@ public class MyAccount_01 extends AbstractTest {
 	private CustomerInfosPageObject customerInfoObject;
 	private CustomerAddressesPageObject customerAddressObject;
 	private CustomerChangePasswordPageObject changePasswordObject;
-	private ProductOverviewPageObject productOverviewObject;
+	private ProductPageObject productObject;
 	private ProductReviewPageObject productReviewObject;
 	private MyProductReviewPageObject myProductReviewObject;
 	private String email;
 	private String newEmail;
 	private String password = GlobalConstants.PASSWORD;
 	private String newPassword = "654321";
-	private String newGender = "female";
+//	private String newGender = "female";
+	private String newGender = "F";
 	private String newFirstName = "Automation";
 	private String newLastName = "FC";
 	private String[] newOB = { "January", "1", "1999" };
@@ -58,13 +59,13 @@ public class MyAccount_01 extends AbstractTest {
 		driverManager = BrowserDriverFactory.getBrowserDriver(browserName);
 		driver = driverManager.getDriver();
 		startObject = PageFactoryManager.getStartPageObject(driver);
-		startObject.navigateToPage_HeaderLink(driver, "register");
-		registerObject = PageFactoryManager.getRegisterPageObject(driver);
+		startObject.navigateToPage_HeaderLink(driver, "login");
+		loginObject = PageFactoryManager.getLoginPageObject(driver);
+		loginObject.inputToDynamicTextbox(driver, "Email", GlobalConstants.EMAIL);
+		loginObject.inputToDynamicTextbox(driver, "Password", GlobalConstants.PASSWORD);
+		loginObject.clickToDynamicButton(driver, "Log in");
+		verifyTrue(loginObject.isMyAccountDisplayed());
 
-		// register + login success
-		email = createRandomEmail(GlobalConstants.FIRSTNAME, GlobalConstants.LASTNAME);
-		registerObject.register(GlobalConstants.FIRSTNAME, GlobalConstants.LASTNAME, email, password);
-		GlobalConstants.EMAIL = email;
 		homeObject = PageFactoryManager.getHomePageObject(driver);
 	}
 
@@ -75,41 +76,40 @@ public class MyAccount_01 extends AbstractTest {
 		customerInfoObject = PageFactoryManager.getCustomerInfosPageObject(driver);
 
 		// Update infos
-		customerInfoObject.updateGender(newGender);
-		customerInfoObject.updateFirstName(newFirstName);
-		customerInfoObject.updateLastName(newLastName);
+		customerInfoObject.clickToDynamicRadioButton(driver, newGender);
+		customerInfoObject.inputToDynamicTextbox(driver, "FirstName", newFirstName);
+		customerInfoObject.inputToDynamicTextbox(driver, "LastName", newLastName);
 		customerInfoObject.updateDateOfBirth(newOB[0], newOB[1], newOB[2]);
 		newEmail = createRandomEmail("automationfc", "vn");
-		customerInfoObject.updateEmail(newEmail);
-		customerInfoObject.updateCompanyName(newCompanyName);
+		customerInfoObject.inputToDynamicTextbox(driver, "Email", newEmail);
+		customerInfoObject.inputToDynamicTextbox(driver, "Company", newCompanyName);
 
 		// save new infos
-		customerInfoObject.clickSaveButton();
+		customerInfoObject.clickToDynamicButton(driver, "Save");
 		GlobalConstants.EMAIL = newEmail;
 
-		// Verify infos after new
-		actualValue = customerInfoObject.getValueOfField("female");
-		Assert.assertEquals(actualValue, newGender);
+		// Verify infos after update
+		Assert.assertTrue(customerInfoObject.isRadioButtonSelected(driver, newGender));
 
-		actualValue = customerInfoObject.getValueOfField("first name");
+		actualValue = customerInfoObject.getTextboxValue(driver, "FirstName");
 		Assert.assertEquals(actualValue, newFirstName);
 
-		actualValue = customerInfoObject.getValueOfField("last name");
+		actualValue = customerInfoObject.getTextboxValue(driver, "LastName");
 		verifyEquals(actualValue, newLastName);
 
-		actualValue = customerInfoObject.getValueOfField("birth day");
+		actualValue = customerInfoObject.getDropdownTextSelected(driver, "Day");
 		verifyEquals(actualValue, newOB[1]);
 
-		actualValue = customerInfoObject.getValueOfField("birth month");
+		actualValue = customerInfoObject.getDropdownTextSelected(driver, "Month");
 		verifyEquals(actualValue, newOB[0]);
 
-		actualValue = customerInfoObject.getValueOfField("birth year");
+		actualValue = customerInfoObject.getDropdownTextSelected(driver, "Year");
 		verifyEquals(actualValue, newOB[2]);
 
-		actualValue = customerInfoObject.getValueOfField("email");
+		actualValue = customerInfoObject.getTextboxValue(driver, "Email");
 		verifyEquals(actualValue, newEmail);
 
-		actualValue = customerInfoObject.getValueOfField("company");
+		actualValue = customerInfoObject.getTextboxValue(driver, "Company");
 		verifyEquals(actualValue, newCompanyName);
 	}
 
@@ -130,57 +130,55 @@ public class MyAccount_01 extends AbstractTest {
 		customerAddressObject = PageFactoryManager.getCustomerAddressesPageObject(driver);
 
 		// click add new
-		customerAddressObject.clickAddNewButton();
+		customerAddressObject.clickToDynamicButton(driver, "Add new");
 
 		// enter new address
-		customerAddressObject.inputNewInfos("FirstName", newFirstName);
-		customerAddressObject.inputNewInfos("LastName", newLastName);
-		customerAddressObject.inputNewInfos("Email", newEmail);
-		customerAddressObject.inputNewInfos("Company", newCompanyName);
-
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.FirstName", newFirstName);
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.LastName", newLastName);
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.Email", newEmail);
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.Company", newCompanyName);
 		customerAddressObject.selectNewInfos("CountryId", country);
 		customerAddressObject.selectNewInfos("StateProvinceId", state);
-
-		customerAddressObject.inputNewInfos("City", city);
-		customerAddressObject.inputNewInfos("Address1", address1);
-		customerAddressObject.inputNewInfos("Address2", address2);
-		customerAddressObject.inputNewInfos("ZipPostalCode", zipcode);
-		customerAddressObject.inputNewInfos("PhoneNumber", phoneNumber);
-		customerAddressObject.inputNewInfos("FaxNumber", faxNumber);
-
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.City", city);
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.Address1", address1);
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.Address2", address2);
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.ZipPostalCode", zipcode);
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.PhoneNumber", phoneNumber);
+		customerAddressObject.inputToDynamicTextbox(driver, "Address.FaxNumber", faxNumber);
+		
 		// click save
-		customerAddressObject.clickSaveButton();
+		customerAddressObject.clickToDynamicButton(driver, "Save");
 
 		// Verify address
-		actualValue = customerAddressObject.getCustomerName("Automation FC", "name");
+		actualValue = customerAddressObject.getCustomerInfo("Automation FC", "name");
 		verifyTrue(actualValue.contains(newFirstName + " " + newLastName));
 
-		actualValue = customerAddressObject.getCustomerName("Automation FC", "email");
+		actualValue = customerAddressObject.getCustomerInfo("Automation FC", "email");
 		verifyTrue(actualValue.contains(newEmail));
 
-		actualValue = customerAddressObject.getCustomerName("Automation FC", "phone");
+		actualValue = customerAddressObject.getCustomerInfo("Automation FC", "phone");
 		verifyTrue(actualValue.contains(phoneNumber));
 
-		actualValue = customerAddressObject.getCustomerName("Automation FC", "fax");
+		actualValue = customerAddressObject.getCustomerInfo("Automation FC", "fax");
 		verifyTrue(actualValue.contains(faxNumber));
 
-		actualValue = customerAddressObject.getCustomerName("Automation FC", "company");
+		actualValue = customerAddressObject.getCustomerInfo("Automation FC", "company");
 		verifyTrue(actualValue.contains(newCompanyName));
 
-		actualValue = customerAddressObject.getCustomerName("Automation FC", "address1");
+		actualValue = customerAddressObject.getCustomerInfo("Automation FC", "address1");
 		verifyTrue(actualValue.contains(address1));
 
-		actualValue = customerAddressObject.getCustomerName("Automation FC", "address2");
+		actualValue = customerAddressObject.getCustomerInfo("Automation FC", "address2");
 		verifyTrue(actualValue.contains(address2));
 
-		actualValue = customerAddressObject.getCustomerName("Automation FC", "city-state-zip");
+		actualValue = customerAddressObject.getCustomerInfo("Automation FC", "city-state-zip");
 		verifyTrue(actualValue.contains(city + ", " + zipcode));
 
-		actualValue = customerAddressObject.getCustomerName("Automation FC", "country");
+		actualValue = customerAddressObject.getCustomerInfo("Automation FC", "country");
 		verifyTrue(actualValue.contains(country));
 	}
 
-	@Test
+	// @Test
 	public void TC_03_changePassword() {
 		// navigate to change password
 		customerAddressObject.navigateToPage_ContentList(driver, "/customer/changepassword");
@@ -211,7 +209,7 @@ public class MyAccount_01 extends AbstractTest {
 		homeObject = PageFactoryManager.getHomePageObject(driver);
 	}
 
-	@Test
+	// @Test
 	public void TC_04_myProductReviews() {
 		// data
 		String url = "https://demo.nopcommerce.com/adidas-consortium-campus-80s-running-shoes";
@@ -221,15 +219,15 @@ public class MyAccount_01 extends AbstractTest {
 
 		// open random product and add review 1
 		homeObject.openURL(driver, url);
-		productOverviewObject = PageFactoryManager.getProductOverviewPageObject(driver);
-		productName = productOverviewObject.getProductName();
-		productReviewObject = productOverviewObject.addReview(reviewTitle, reviewText, "3");
+		productObject = PageFactoryManager.getProductPageObject(driver);
+		productName = productObject.getProductName();
+		productReviewObject = productObject.addReview(reviewTitle, reviewText, "3");
 
 		// open the product again and add review 2
 		productReviewObject.openURL(driver, url);
-		productOverviewObject = PageFactoryManager.getProductOverviewPageObject(driver);
-		productName = productOverviewObject.getProductName();
-		productReviewObject = productOverviewObject.addReview(reviewTitle, reviewText, "1");
+		productObject = PageFactoryManager.getProductPageObject(driver);
+		productName = productObject.getProductName();
+		productReviewObject = productObject.addReview(reviewTitle, reviewText, "1");
 
 		// navigate to my product reviews
 		productReviewObject.navigateToPage_HeaderLink(driver, "account");

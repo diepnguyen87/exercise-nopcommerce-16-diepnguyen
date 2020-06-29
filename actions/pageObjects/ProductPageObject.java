@@ -3,25 +3,25 @@ package pageObjects;
 import org.openqa.selenium.WebDriver;
 
 import commons.AbstractPage;
-import pageUI.ProductOverviewPageUI;
+import pageUI.ProductPageUI;
 
-public class ProductOverviewPageObject extends AbstractPage{
+public class ProductPageObject extends AbstractPage{
 
 	private WebDriver driver;
 	
-	public ProductOverviewPageObject(WebDriver driver) {
+	public ProductPageObject(WebDriver driver) {
 		this.driver = driver;
 	}
 
 	public ProductReviewPageObject clickAddYourReviewLink() {
-		waitForElementClickable(driver, ProductOverviewPageUI.ADD_REVIEW_LINK);
-		clickToElement(driver, ProductOverviewPageUI.ADD_REVIEW_LINK);
+		waitForElementClickable(driver, ProductPageUI.ADD_REVIEW_LINK);
+		clickToElement(driver, ProductPageUI.ADD_REVIEW_LINK);
 		return PageFactoryManager.getProductReviewPageObject(driver);
 	}
 
 	public String getProductName() {
-		waitForElementVisible(driver, ProductOverviewPageUI.PRODUCT_NAME);
-		return getElementText(driver, ProductOverviewPageUI.PRODUCT_NAME);
+		waitForElementVisible(driver, ProductPageUI.PRODUCT_NAME);
+		return getElementText(driver, ProductPageUI.PRODUCT_NAME);
 	}
 	
 	public ProductReviewPageObject addReview(String reviewTitle, String reviewText, String rating) {
@@ -34,5 +34,15 @@ public class ProductOverviewPageObject extends AbstractPage{
 		productReviewObject.selectRating(rating);
 		productReviewObject.clickSubmitReview();
 		return productReviewObject;
+	}
+
+	public void addWishlist() {
+		waitForElementVisible(driver, ProductPageUI.ADD_TO_WISHLIST);
+		clickToElement(driver, ProductPageUI.ADD_TO_WISHLIST);
+	}
+
+	public String getActualNotification() {
+		waitForElementVisible(driver, ProductPageUI.BAR_NOTIFICATION);
+		return getElementText(driver, ProductPageUI.BAR_NOTIFICATION);
 	}
 }

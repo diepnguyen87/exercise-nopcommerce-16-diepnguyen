@@ -19,6 +19,7 @@ import pageObjects.HomePageObject;
 import pageObjects.PageFactoryManager;
 import pageObjects.StartPageObject;
 import pageUI.AbstractPageUI;
+import pageUI.CustomerInfosPageUI;
 import pageUI.MyAccountPageUI;
 import pageUI.SubCategoriesPageUI;
 
@@ -50,7 +51,7 @@ public abstract class AbstractPage {
 	}
 
 	public void navigateToPage_HeaderLink(WebDriver driver, String pageName) {
-		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_HEADER_LINK, pageName);
+		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_HEADER_LINK, pageName);		
 		clickToElement(driver, AbstractPageUI.DYNAMIC_HEADER_LINK, pageName);
 	}
 
@@ -164,6 +165,10 @@ public abstract class AbstractPage {
 	public List<WebElement> findElements(WebDriver driver, String xpathLocator) {
 		return driver.findElements(byXpath(driver, xpathLocator));
 	}
+	
+	public List<WebElement> findElements(WebDriver driver, String xpathLocator, String... xpathParams) {
+		return driver.findElements(byXpath(driver, castToObject(xpathLocator, xpathParams)));
+	}
 
 	public void clickToElement(WebDriver driver, String xpathLocator, String... xpathParams) {
 		findElement(driver, castToObject(xpathLocator, xpathParams)).click();
@@ -222,6 +227,10 @@ public abstract class AbstractPage {
 
 	public String getAttributeValue(WebDriver driver, String xpathLocator, String attributeName) {
 		return findElement(driver, xpathLocator).getAttribute(attributeName);
+	}
+	
+	public String getAttributeValue(WebDriver driver, String xpathLocator, String attributeName, String... xpathParams) {
+		return findElement(driver, castToObject(xpathLocator, xpathParams)).getAttribute(attributeName);
 	}
 
 	public String getElementText(WebDriver driver, String xpathLocator) {
@@ -423,6 +432,59 @@ public abstract class AbstractPage {
 			e.printStackTrace();
 		}
 	}
+
+	public void inputToDynamicTextbox(WebDriver driver, String nameAttributeValue, String inputValue) {
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, nameAttributeValue);
+		sendKeyToElement(driver, AbstractPageUI.DYNAMIC_TEXTBOX, inputValue, nameAttributeValue);
+	}
+	
+	public void inputToTextarea(WebDriver driver, String nameAttributValue, String inputValue) {
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTAREA, nameAttributValue);
+		sendKeyToElement(driver, AbstractPageUI.DYNAMIC_TEXTAREA, inputValue, nameAttributValue);
+	}
+	
+	public void clickToDynamicButton(WebDriver driver, String buttonValue) {
+		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_BUTTON, buttonValue);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_BUTTON, buttonValue);
+	}
+	
+	public void clickToDynamicRadioButton(WebDriver driver, String radioButtonValue) {
+		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON, radioButtonValue);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON, radioButtonValue);
+	}
+	
+	public void clickToDynamicLink(WebDriver driver, String linkPageName) {
+		waitForElementClickable(driver, AbstractPageUI.DYNAMIC_LINK, linkPageName);
+		clickToElement(driver, AbstractPageUI.DYNAMIC_LINK, linkPageName);
+	}
+
+	public boolean isDynamicMessageDisplayed(WebDriver driver, String messageText) {
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_MESSAGE, messageText);
+		return isElementDisplayed(driver, AbstractPageUI.DYNAMIC_MESSAGE, messageText);
+	}
+	
+	public String getDynamicValueByColumnName(WebDriver driver, String messageText) {
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_VALUE_BY_COLUMN_NAME, messageText);
+		return getElementText(driver, AbstractPageUI.DYNAMIC_VALUE_BY_COLUMN_NAME, messageText);
+	}
+	
+	public String getTextboxValue(WebDriver driver, String nameAttributeValue) {
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_TEXTBOX, nameAttributeValue);
+		return getAttributeValue(driver, AbstractPageUI.DYNAMIC_TEXTBOX, "value", nameAttributeValue);
+	}
+	
+	public boolean isRadioButtonSelected(WebDriver driver, String radioButtonValue) {
+		waitForElementVisible(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON, radioButtonValue);
+		return isElementSelected(driver, AbstractPageUI.DYNAMIC_RADIO_BUTTON, radioButtonValue);
+	}
+	
+	public String getDropdownTextSelected(WebDriver driver, String nameAttributeParam) {
+		waitForElementVisible(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, nameAttributeParam);
+		return getSelectedItemInDropdown(driver, CustomerInfosPageUI.DYNAMIC_DOB_SELECT, nameAttributeParam).getText();
+	}
+	
+	
+	
 
 	private WebDriverWait explicitWait;
 	private WebElement element;
